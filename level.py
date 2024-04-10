@@ -31,11 +31,11 @@ class Level:
 
 	def create_tile_group(self,layout,type):
 		if type == 'background'  :
-			bg_tile_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap9.png')
+			bg_tile_list = import_cut_graphic('./assets/Tiled/TileMap9.png')
 		elif type == 'Floor' or type == 'slant_tiles1':
-			floor_tile_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap8.PNG')
+			floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'outline':
-			outline_tile_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap10.png')
+			outline_tile_list = import_cut_graphic('./assets/Tiled/TileMap10.png')
 		# elif type== 'slant_tiles2':
 		# 	bottom_left_slant_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap8.png')
 		sprite_group = pygame.sprite.Group()
