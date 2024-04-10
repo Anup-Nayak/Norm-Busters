@@ -100,14 +100,12 @@ class Level:
 		player.rect.y += player.direction.y
 		player.apply_gravity()
 		# Check collision with outline tiles
-		player.on_ground = False
 		for sprite in self.outline.sprites():
 			if sprite.rect.colliderect(player.rect):
 				# Check collision from above
-				if player.rect.bottom >= sprite.rect.top and player.direction.y > 0:
+				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
-					player.on_ground = True
 					
 					# Handle downward collision here
 
