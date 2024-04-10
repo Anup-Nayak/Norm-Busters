@@ -20,6 +20,10 @@ class Level:
 		slant_tiles1_layout = import_csv_layout(level_data['Slant_Tiles1'])
 		self.slant_tiles1_layout = self.create_tile_group(slant_tiles1_layout,'slant_tiles1')
 
+		
+		slant_tiles2_layout = import_csv_layout(level_data['Slant_Tiles2'])
+		self.slant_tiles2_layout = self.create_tile_group(slant_tiles1_layout,'slant_tiles2')
+
 		player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
 		self.player_setup(player_layout)
@@ -32,6 +36,8 @@ class Level:
 			floor_tile_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap8.PNG')
 		elif type == 'outline':
 			outline_tile_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap10.png')
+		# elif type== 'slant_tiles2':
+		# 	bottom_left_slant_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap8.png')
 		sprite_group = pygame.sprite.Group()
 		for row_index,row in enumerate(layout):
 			for col_index,val in enumerate(row):
@@ -56,6 +62,11 @@ class Level:
 						tile_surface = floor_tile_list[int(val)].convert_alpha()
 						sprite = StaticTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
+					# if type == 'slant_tiles2':
+					# 	tile_surface = f_tile_list[int(val)].convert_alpha()
+					# 	sprite = StaticTile(TILESIZE,x,y,tile_surface)
+					# 	sprite_group.add(sprite)
+					
 		return sprite_group
 	def player_setup(self,layout):
 		for row_index,row in enumerate(layout):
@@ -83,7 +94,7 @@ class Level:
 					player.rect.left = sprite.rect.right
 					# Handle right collision here
 
-		self.detect_top_left_slant_collision()
+		# self.detect_top_left_slant_collision()
 	def vertical_collision(self):
 		player = self.player.sprite
 		player.rect.y += player.direction.y
@@ -105,25 +116,28 @@ class Level:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
 					# Handle upward collision here
-		self.detect_top_left_slant_collision()
-	def detect_top_left_slant_collision(self):
-		player = self.player.sprite
-		for sprite in self.slant_tiles1_layout.sprites():
-			constant = sprite.rect.topleft[1] - sprite.rect.topleft[0]
-			player_top_left = player.rect.topleft
-			player_top_right = player.rect.topright
+		# self.detect_top_left_slant_collision()
+	# def detect_top_left_slant_collision(self):
+	# 	player = self.player.sprite
+	# 	for sprite in self.slant_tiles1_layout.sprites():
+	# 		constant = sprite.rect.topleft[1] - sprite.rect.topleft[0]
+	# 		player_top_left = player.rect.topleft
+	# 		player_top_right = player.rect.topright
 
-			if (player_top_right[1] <= player_top_right[0] + constant and
-                    (player.direction.y +player.direction.x)>= 0) and (player_top_right[0]<= sprite.rect.topright[0]) and (player_top_right[1] >= sprite.rect.topright[1]):  # Check player's component in the direction of slant is positive
-					# print(1)
-					debug([player_top_right,sprite.rect.topright])
-                # Adjust player's top-right corner to be on the boundary
-					player_top_right = (player_top_right[0], player_top_right[0] + constant)
-					player.rect.topright = player_top_right
+	# 		if (player_top_right[1] <= player_top_right[0] + constant and
+    #                 (player.direction.y +player.direction.x)>= 0) and (player_top_right[0]<= sprite.rect.topright[0]) and (player_top_right[1] >= sprite.rect.topright[1]):  # Check player's component in the direction of slant is positive
+	# 				# print(1)
+	# 				debug([player_top_right,sprite.rect.topright])
+    #             # Adjust player's top-right corner to be on the boundary
+	# 				player_top_right = (player_top_right[0], player_top_right[0] + constant)
+	# 				player.rect.topright = player_top_right
 
                 # Resolve collision based on tile's slant angle and player direction
 				# player.resolve_top_left_slant_collision(tile.angle)
-		
+	# def detect_bottom_left_slant_collision(self):
+	# 	player = self.player.sprite
+	# 	for sprite in self.slant_tiles1_layout.sprites():
+			
 	
 	def run(self):
 		self.display_surface.fill((255,255,255,255))

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="39" height="29" tilewidth="180" tileheight="180" infinite="0" nextlayerid="9" nextobjectid="1">
  <tileset firstgid="1" name="Untitled design (17)" tilewidth="180" tileheight="180" tilecount="36" columns="6">
-  <image source="C:/Users/abhis/Downloads/Untitled design (17).png" width="1080" height="1080"/>
+  <image source="../../Tiled/Untitled design (17).png" width="1080" height="1080"/>
  </tileset>
  <tileset firstgid="37" name="Untitled design (19)" tilewidth="1080" tileheight="180" tilecount="6" columns="1">
-  <image source="C:/Users/abhis/Downloads/Untitled design (19).png" width="1080" height="1080"/>
+  <image source="../../Tiled/Untitled design (19).png" width="1080" height="1080"/>
  </tileset>
  <tileset firstgid="43" name="Untitled design (25)" tilewidth="180" tileheight="180" tilecount="36" columns="6">
-  <image source="C:/Users/abhis/Downloads/Untitled design (25).png" width="1080" height="1080"/>
+  <image source="../../Tiled/Untitled design (25).png" width="1080" height="1080"/>
  </tileset>
  <layer id="8" name="Background" width="39" height="29">
   <data encoding="csv">

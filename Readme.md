@@ -1,11 +1,11 @@
 # Fireboy and Watergirl Type Game
 
-Course Project for COP290 Design Practices,IIT Delhi 2022.
+Course Project for COP290 Design Practices, IIT Delhi 2024.
 
 Group Members:
 
 - Abhishek (2022CS11598)
-- Anup (2022CS511827)
+- Anup (2022CS51827)
 
 ## Installation
 

@@ -4,10 +4,10 @@
   <export target="Initial.csv" format="csv"/>
  </editorsettings>
  <tileset firstgid="1" name="TileMap3" tilewidth="180" tileheight="180" tilecount="26" columns="26">
-  <image source="../Tiled/TileMap3.PNG" width="4680" height="180"/>
+  <image source="../../Tiled/TileMap3.PNG" width="4680" height="180"/>
  </tileset>
  <tileset firstgid="27" name="TileMap5" tilewidth="180" tileheight="180" tilecount="36" columns="6">
-  <image source="../Tiled/TileMap5.png" width="1080" height="1080"/>
+  <image source="../../Tiled/TileMap5.png" width="1080" height="1080"/>
  </tileset>
  <layer id="1" name="bg" width="39" height="29" locked="1">
   <data encoding="csv">
