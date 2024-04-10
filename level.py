@@ -41,7 +41,8 @@ class Level:
 			bg_tile_list = import_cut_graphic('./assets/Tiled/TileMap9.png')
 		elif type == 'boundary' or type == 'slant_tiles1' or type == 'level' :
 			floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
-		# elif type == 'platform':
+		elif type == 'platform':
+			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap10.png')
 			
 		# elif type == 'outline':
 		# 	outline_tile_list = import_cut_graphic('./assets/Tiled/TileMap10.png')
@@ -61,6 +62,11 @@ class Level:
 					if type =='boundary' or type == 'level':
 						# print(val)
 						tile_surface = floor_tile_list[int(val)].convert_alpha()
+						sprite = StaticTile(TILESIZE,x,y,tile_surface)
+						sprite_group.add(sprite)
+					if type =='platform':
+						# print(val)
+						tile_surface = platform_tile_list[int(val)].convert_alpha()
 						sprite = StaticTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
 					# if type == 'outline':
@@ -92,7 +98,7 @@ class Level:
 		player.rect.x += player.direction.x
 
 		# Check collision with outline tiles
-		for sprite in self.boundary.sprites():
+		for sprite in self.boundary.sprites() or self.platform.sprites():
 			if sprite.rect.colliderect(player.rect):
 				if player.rect.right > sprite.rect.left and player.direction.x > 0:
 					player.rect.right = sprite.rect.left
@@ -109,19 +115,41 @@ class Level:
 		player.rect.y += player.direction.y
 		player.apply_gravity()
 		# Check collision with outline tiles
-		for sprite in self.boundary.sprites():
+		for sprite in self.boundary.sprites() :
 			if sprite.rect.colliderect(player.rect):
 				# Check collision from above
 				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
-					
+                    			
 					# Handle downward collision here
 
 				# Check collision from below
 				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
+					
+     				
+     
+		
+  
+		for sprite in self.platform.sprites() :
+			
+			if sprite.rect.colliderect(player.rect):
+				# Check collision from above
+				if player.rect.bottom > sprite.rect.top and player.direction.y >= 0:
+					player.rect.bottom = sprite.rect.top
+					player.direction.y = 0
+					player.can_change = True
+					# Handle downward collision here
+
+				# Check collision from below
+				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
+					player.rect.top = sprite.rect.bottom
+					player.direction.y = -0.5*player.direction.y
+			else:
+				player.can_change = False
+        
 					# Handle upward collision here
 		# self.detect_top_left_slant_collision()
 	# def detect_top_left_slant_collision(self):
@@ -151,6 +179,8 @@ class Level:
 		self.bg.draw(self.display_surface)
 		self.boundary.draw(self.display_surface)
 		self.level.draw(self.display_surface)
+		self.platform.draw(self.display_surface)
+  		
   
 		# self.outline.draw(self.display_surface)	
 		# self.slant_tiles1_layout.draw(self.display_surface)

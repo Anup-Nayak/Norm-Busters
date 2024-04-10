@@ -20,6 +20,10 @@ class Player(pygame.sprite.Sprite):
 		self.gender = "Boy"
 		self.speed = {'Boy':5,"Girl":6}
 		self.timer = pygame.time.get_ticks() 
+		self.can_change = False
+		self.status = 'idle_right' 
+		self.jump()
+  
 	def import_character_assets(self):
 		character_path = './assets/Player/'
 		self.animations = {
@@ -71,7 +75,7 @@ class Player(pygame.sprite.Sprite):
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
-		if keys[pygame.K_SPACE] and (pygame.time.get_ticks() > self.timer +500) and (self.status == "idle_left" or self.status == "idle_right"):
+		if keys[pygame.K_SPACE] and (pygame.time.get_ticks() > self.timer +500) and (self.status == "idle_left" or self.status == "idle_right") and self.can_change:
 			self.timer = pygame.time.get_ticks()
 			if self.gender == 'Boy':
 				self.gender = 'Girl'
@@ -140,6 +144,6 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.get_input()
 		self.get_status()
-		debug(self.rect)
+		debug(self.direction)
 		self.animate()
 		self.adjust_rect_for_gender()
