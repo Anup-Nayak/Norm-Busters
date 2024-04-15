@@ -27,6 +27,9 @@ class Level:
 		platform_anim = import_csv_layout(level_data['Platform_Anim'])
 		self.platform_anim = self.create_tile_group(platform_anim,'platform_anim')
 
+		spikes_layout = import_csv_layout(level_data['Spikes'])
+		self.spikes = self.create_tile_group(spikes_layout,'spikes')
+
 		player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
 		self.player_setup(player_layout)
@@ -41,6 +44,8 @@ class Level:
 			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'home':
 			home_tile_list = import_cut_graphic('./assets/home/home1.jpg')
+		elif type == 'spikes':
+			spike_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
 		elif type =='platform_anim':
 			platform_anim_tile_list = import_cut_graphic('./assets/Platform/Cf.png')
 		sprite_group = pygame.sprite.Group()
@@ -78,6 +83,12 @@ class Level:
 						tile_surface = platform_anim_tile_list[int(val)].convert_alpha()
 						sprite = Platform_Anim(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
+      
+					elif type == 'spikes':
+
+						tile_surface = spike_tile_list[int(val)].convert_alpha()
+						sprite = HomeTile(TILESIZE,x,y,tile_surface)
+						sprite_group.add(sprite)
 					
 		return sprite_group
 	def player_setup(self,layout):
@@ -94,23 +105,42 @@ class Level:
 		player = self.player.sprite
 		player.rect.x += player.direction.x
 
-		# Check collision with outline tiles
 		for sprite in self.boundary.sprites():
 			if sprite.rect.colliderect(player.rect):
 				player.can_change = False
 				if player.rect.right > sprite.rect.left and player.direction.x > 0:
 					player.rect.right = sprite.rect.left
-					# Handle left collision here
 
-				# Check collision from right side
+				
 				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
 					player.rect.left = sprite.rect.right
-					# Handle right collision here
+		
+		for sprite in self.spikes.sprites():
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				if player.rect.right > sprite.rect.left and player.direction.x > 0:
+					player.rect.right = sprite.rect.left
 
-		# for sprite in self.boundary.sprites():
-		# 	player.handle_collision(sprite)
+				
+				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
+					player.rect.left = sprite.rect.right
 
-		# self.detect_top_left_slant_collision()
+				pygame.quit()
+    
+		for sprite in self.home.sprites():
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				if player.rect.right > sprite.rect.left and player.direction.x > 0:
+					player.rect.right = sprite.rect.left
+
+				
+				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
+					player.rect.left = sprite.rect.right
+
+				pygame.quit()
+				
+
+		
 	def vertical_collision(self):
 		player = self.player.sprite
 		player.rect.y += player.direction.y
@@ -119,20 +149,17 @@ class Level:
 		for sprite in self.boundary.sprites() :
 			if sprite.rect.colliderect(player.rect):
 				player.can_change = False
-				# Check collision from above
+				
 				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
                     			
-					# Handle downward collision here
+					
 
-				# Check collision from below
 				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
 					
-     				
-     
 		
   
 		for sprite in self.platform.sprites() :
@@ -143,36 +170,45 @@ class Level:
 					player.rect.bottom = sprite.rect.top
 					player.direction.y = 0
 					player.can_change = True
-					# Handle downward collision here
 
-				# Check collision from below
+				
 				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
 			
         
-					# Handle upward collision here
-		# self.detect_top_left_slant_collision()
-	# def detect_top_left_slant_collision(self):
-	# 	player = self.player.sprite
-	# 	for sprite in self.slant_tiles1_layout.sprites():
-	# 		constant = sprite.rect.topleft[1] - sprite.rect.topleft[0]
-	# 		player_top_left = player.rect.topleft
-	# 		player_top_right = player.rect.topright
+		for sprite in self.spikes.sprites():
+			
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				
+				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
+					player.rect.bottom = sprite.rect.top
+					player.direction.y = 0
+                    			
+					
 
-	# 		if (player_top_right[1] <= player_top_right[0] + constant and
-    #                 (player.direction.y +player.direction.x)>= 0) and (player_top_right[0]<= sprite.rect.topright[0]) and (player_top_right[1] >= sprite.rect.topright[1]):  # Check player's component in the direction of slant is positive
-	# 				# print(1)
-	# 				debug([player_top_right,sprite.rect.topright])
-    #             # Adjust player's top-right corner to be on the boundary
-	# 				player_top_right = (player_top_right[0], player_top_right[0] + constant)
-	# 				player.rect.topright = player_top_right
+				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
+					player.rect.top = sprite.rect.bottom
+					player.direction.y = -0.5*player.direction.y
+				pygame.quit()
+    
+		for sprite in self.home.sprites():
+			
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				
+				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
+					player.rect.bottom = sprite.rect.top
+					player.direction.y = 0
+                    			
+					
 
-                # Resolve collision based on tile's slant angle and player direction
-				# player.resolve_top_left_slant_collision(tile.angle)
-	# def detect_bottom_left_slant_collision(self):
-	# 	player = self.player.sprite
-	# 	for sprite in self.slant_tiles1_layout.sprites():
+				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
+					player.rect.top = sprite.rect.bottom
+					player.direction.y = -0.5*player.direction.y
+				pygame.quit()
+				
 	
 	
 	def run(self):
@@ -186,7 +222,8 @@ class Level:
 		self.platform.draw(self.display_surface)
 		self.home.draw(self.display_surface)
 		self.platform_anim.draw(self.display_surface)
-  		
+		self.spikes.draw(self.display_surface)
+		
   
 		# self.outline.draw(self.display_surface)	
 		# self.slant_tiles1_layout.draw(self.display_surface)

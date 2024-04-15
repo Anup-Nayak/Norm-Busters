@@ -5,7 +5,7 @@ class Tile(pygame.sprite.Sprite):
 	def __init__(self,size,x,y):
 		super().__init__()
 		self.image = pygame.Surface((size,size), pygame.SRCALPHA)
-		self.mask = self.mask = pygame.mask.from_surface(self.image)
+		# self.mask = self.mask = pygame.mask.from_surface(self.image)
 		# self.image.fill(WHITE) 
 		self.rect = self.image.get_rect(topleft = (x,y))
 	def set_image(self,surface):

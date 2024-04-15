@@ -1,0 +1,54 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Initial.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Initial.tmx": {
+            "scale": 0.16,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 3446.875,
+                "y": 1996.875
+            }
+        },
+        "Initial.tmx#Run2F": {
+            "scaleInDock": 1
+        },
+        "Initial.tmx#TileMap3": {
+            "scaleInDock": 0.125
+        },
+        "Initial.tmx#TileMap5": {
+            "scaleInDock": 0.25
+        },
+        "Initial.tmx#Untitled design (19)": {
+            "scaleInDock": 1
+        },
+        "home.tsx": {
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_0",
+    "last.imagePath": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/home",
+    "map.lastUsedExportFilter": "All Files (*)",
+    "openFiles": [
+        "Initial.tmx",
+        "home.tsx"
+    ],
+    "project": "level2.tiled-project",
+    "recentFiles": [
+        "home.tsx",
+        "Initial.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 180,
+        "width": 180
+    }
+}

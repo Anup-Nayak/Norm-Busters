@@ -12,14 +12,14 @@ def resize_image(image_path, width, height):
         resized_img = img.resize((width, height))
         
         # Save the resized image
-        resized_img.save(os.path.join(os.getcwd(),'spikef.png').replace("\\", "/"))
+        resized_img.save(os.path.join(os.getcwd(),'spikeF.png').replace("\\", "/"))
         print("Image resized successfully.")
     except Exception as e:
         print("Error:", e)
 
 image_path = os.path.join(os.getcwd(), 'spikef.png').replace("\\", "/")
 
-new_width = 180
-new_height = 180
+new_width = 25
+new_height = 25
 # Resize the image
 resize_image(image_path, new_width, new_height)
