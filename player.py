@@ -8,12 +8,18 @@ class Player(pygame.sprite.Sprite):
 		super().__init__()
 		self.import_character_assets()
 		self.frame_index = 0 
-		self.animation_speed = 0.15
+		self.animation_speed = {
+			'Boy':0.15,
+			'Girl': 0.30
+		}
 		self.image = self.animations['Boy']['idle_right'][self.frame_index]
 		# self.image.fill('black')
 		self.rect = self.image.get_rect(topleft = (pos[0],pos[1]-55))
 		self.direction = pygame.math.Vector2(0,0)
-		self.gravity = 0.3
+		self.gravity = {
+			'Boy':0.3,
+			'Girl':0.3
+		}
 		self.jump_speed = {'Boy':-7.7,'Girl': -8.8}
 		self.idle_state = '_right'
 		self.on_ground = True
@@ -106,7 +112,7 @@ class Player(pygame.sprite.Sprite):
 			self.direction.y = self.jump_speed[self.gender]
 	def apply_gravity(self):
 		if self.on_ground == False:
-			self.direction.y += self.gravity 
+			self.direction.y += self.gravity[self.gender] 
 
 	def get_status(self):
 		if self.direction.y < 0:
@@ -128,7 +134,7 @@ class Player(pygame.sprite.Sprite):
 			self.status = 'idle'+self.idle_state
 	def animate(self):
 		animations = self.animations[self.gender][self.status]
-		self.frame_index += self.animation_speed
+		self.frame_index += self.animation_speed[self.gender]
 		if self.frame_index >= len(animations):
 			self.frame_index = 0
 		self.image = animations[int(self.frame_index)]

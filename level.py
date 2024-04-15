@@ -18,25 +18,14 @@ class Level:
 		level_layout =	import_csv_layout(level_data['level'])
 		self.level = self.create_tile_group(level_layout,'level')
   
-		platform_layout =	import_csv_layout(level_data['platform'])
+		platform_layout = import_csv_layout(level_data['platform'])
 		self.platform = self.create_tile_group(platform_layout,'platform')
-  
+
 		home_layout =	import_csv_layout(level_data['home'])
 		self.home = self.create_tile_group(home_layout,'home')
 
-
 		platform_anim = import_csv_layout(level_data['Platform_Anim'])
 		self.platform_anim = self.create_tile_group(platform_anim,'platform_anim')
-  
-		# outline_layout = import_csv_layout(level_data['Outline'])
-		# self.outline = self.create_tile_group(outline_layout,'outline')
-
-		# slant_tiles1_layout = import_csv_layout(level_data['Slant_Tiles1'])
-		# self.slant_tiles1_layout = self.create_tile_group(slant_tiles1_layout,'slant_tiles1')
-
-		
-		# slant_tiles2_layout = import_csv_layout(level_data['Slant_Tiles2'])
-		# self.slant_tiles2_layout = self.create_tile_group(slant_tiles1_layout,'slant_tiles2')
 
 		player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
