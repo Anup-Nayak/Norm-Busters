@@ -7,10 +7,10 @@ from debug import debug
 
 class Level:
 	def __init__(self,level_data,surface):
+		self.coins = 0
 		self.display_surface = surface
 		bg_layout =	import_csv_layout(level_data['background'])
 		self.bg = self.create_tile_group(bg_layout,'background')
-
 
 		floor_layout = import_csv_layout(level_data['boundary'])
 		self.boundary = self.create_tile_group(floor_layout,'boundary')
@@ -29,6 +29,9 @@ class Level:
 
 		spikes_layout = import_csv_layout(level_data['Spikes'])
 		self.spikes = self.create_tile_group(spikes_layout,'spikes')
+  
+		rewards_layout = import_csv_layout(level_data['rewards'])
+		self.rewards = self.create_tile_group(rewards_layout,'rewards')
 
 		player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
@@ -46,6 +49,8 @@ class Level:
 			home_tile_list = import_cut_graphic('./assets/home/home1.jpg')
 		elif type == 'spikes':
 			spike_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
+		elif type == 'rewards':
+			reward_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
 		elif type =='platform_anim':
 			platform_anim_tile_list = import_cut_graphic('./assets/Platform/Cf.png')
 		sprite_group = pygame.sprite.Group()
@@ -55,7 +60,7 @@ class Level:
 					x = col_index*TILESIZE
 					y = row_index*TILESIZE
 					if type == 'background':
-						# print(val)
+						
 						tile_surface = bg_tile_list[int(val)].convert_alpha()
 						sprite = StaticTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
@@ -87,6 +92,12 @@ class Level:
 					elif type == 'spikes':
 
 						tile_surface = spike_tile_list[int(val)].convert_alpha()
+						sprite = HomeTile(TILESIZE,x,y,tile_surface)
+						sprite_group.add(sprite)
+      
+					elif type == 'rewards':
+
+						tile_surface = reward_tile_list[0].convert_alpha()
 						sprite = HomeTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
 					
@@ -138,7 +149,21 @@ class Level:
 					player.rect.left = sprite.rect.right
 
 				pygame.quit()
+		
+		for sprite in self.rewards.sprites():
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				if player.rect.right > sprite.rect.left and player.direction.x > 0:
+					player.rect.right = sprite.rect.left
+
 				
+				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
+					player.rect.left = sprite.rect.right
+
+				self.rewards.remove(sprite)
+				self.coins += 1
+				
+		
 
 		
 	def vertical_collision(self):
@@ -209,6 +234,22 @@ class Level:
 					player.direction.y = -0.5*player.direction.y
 				pygame.quit()
 				
+		for sprite in self.rewards.sprites():
+			
+			if sprite.rect.colliderect(player.rect):
+				player.can_change = False
+				
+				if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
+					player.rect.bottom = sprite.rect.top
+					player.direction.y = 0
+                    			
+					
+
+				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
+					player.rect.top = sprite.rect.bottom
+					player.direction.y = -0.5*player.direction.y
+				self.rewards.remove(sprite)
+				self.coins += 1
 	
 	
 	def run(self):
@@ -223,6 +264,7 @@ class Level:
 		self.home.draw(self.display_surface)
 		self.platform_anim.draw(self.display_surface)
 		self.spikes.draw(self.display_surface)
+		self.rewards.draw(self.display_surface)
 		
   
 		# self.outline.draw(self.display_surface)	
@@ -237,3 +279,5 @@ class Level:
 		# for sprite in self.player:
 		# 	sprite.draw_mask(self.display_surface)
 		pygame.display.flip()
+
+		debug(self.coins)

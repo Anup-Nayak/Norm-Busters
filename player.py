@@ -151,7 +151,7 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.get_input()
 		self.get_status()
-		debug(self.can_change)
+		# debug(self.can_change)
 		self.animate()
 		self.adjust_rect_for_gender()
 

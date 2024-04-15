@@ -10,7 +10,8 @@ level_0 = {
 	# 'Floor': './assets/levels/level_0/Initial_floor.csv',
 	'Player': './assets/levels/level_0/level1_Player.csv',
 	'Platform_Anim':'./assets/levels/level_0/level1_Platform_anim.csv',
-	'Spikes': './assets/levels/level_0/level1_Obstacles.csv'
+	'Spikes': './assets/levels/level_0/level1_Obstacles.csv',
+	'rewards': './assets/levels/level_0/level1_rewards.csv',
 	# 'Liquid': './assets/levels/level_0/untitled._Liquid',
 	# 'Outline': './assets/levels/level_0/Initial_Outline.csv',
 	# 'Switches': './assets/levels/level_0/untitled._Switches',
