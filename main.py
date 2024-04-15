@@ -21,7 +21,7 @@ class Game:
 			self.screen.fill((255, 255, 255, 255))
 			self.level.run()
 			pygame.display.flip()
-			self.clock.tick(FPS)
+			self.clock.tick(FPS)	
 if __name__ == '__main__':
 	game = Game()
-	game.run()
+	game.run() 

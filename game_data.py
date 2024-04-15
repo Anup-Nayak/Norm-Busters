@@ -9,6 +9,7 @@ level_0 = {
 	# 'Doors': './assets/levels/level_0/._Doors',
 	# 'Floor': './assets/levels/level_0/Initial_floor.csv',
 	'Player': './assets/levels/level_0/level1_Player.csv',
+	'Platform_Anim':'./assets/levels/level_0/level1_Platform_anim.csv',
 	# 'Liquid': './assets/levels/level_0/untitled._Liquid',
 	# 'Outline': './assets/levels/level_0/Initial_Outline.csv',
 	# 'Switches': './assets/levels/level_0/untitled._Switches',

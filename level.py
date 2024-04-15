@@ -1,7 +1,7 @@
 import pygame
 from support import import_csv_layout,import_cut_graphic
 from settings import TILESIZE
-from tiles import Tile,StaticTile,OutlineTile
+from tiles import *
 from player import Player
 from debug import debug
 
@@ -23,6 +23,10 @@ class Level:
   
 		home_layout =	import_csv_layout(level_data['home'])
 		self.home = self.create_tile_group(home_layout,'home')
+
+
+		platform_anim = import_csv_layout(level_data['Platform_Anim'])
+		self.platform_anim = self.create_tile_group(platform_anim,'platform_anim')
   
 		# outline_layout = import_csv_layout(level_data['Outline'])
 		# self.outline = self.create_tile_group(outline_layout,'outline')
@@ -45,14 +49,11 @@ class Level:
 		elif type == 'boundary' or type == 'slant_tiles1' or type == 'level' :
 			floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'platform':
-			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap10.png')
+			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'home':
-			home_tile_list = import_cut_graphic('./assets/home/home1.png')
-			
-		# elif type == 'outline':
-		# 	outline_tile_list = import_cut_graphic('./assets/Tiled/TileMap10.png')
-		# elif type== 'slant_tiles2':
-		# 	bottom_left_slant_list = import_cut_graphic('D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiled/TileMap8.png')
+			home_tile_list = import_cut_graphic('./assets/home/home1.jpg')
+		elif type =='platform_anim':
+			platform_anim_tile_list = import_cut_graphic('./assets/Platform/Cf.png')
 		sprite_group = pygame.sprite.Group()
 		for row_index,row in enumerate(layout):
 			for col_index,val in enumerate(row):
@@ -80,21 +81,14 @@ class Level:
 					elif type =='home':
 						
 						tile_surface = home_tile_list[int(val)].convert_alpha()
-						sprite = StaticTile(TILESIZE,x,y,tile_surface)
+						sprite = HomeTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
-						
-					# if type == 'outline':
-					# 	tile_surface = outline_tile_list[int(val)].convert_alpha()
-					# 	sprite = OutlineTile(TILESIZE,x,y,tile_surface)
-					# 	sprite_group.add(sprite)
-					# if type == 'slant_tiles1':
-					# 	tile_surface = floor_tile_list[int(val)].convert_alpha()
-					# 	sprite = StaticTile(TILESIZE,x,y,tile_surface)
-					# 	sprite_group.add(sprite)
-					# if type == 'slant_tiles2':
-					# 	tile_surface = f_tile_list[int(val)].convert_alpha()
-					# 	sprite = StaticTile(TILESIZE,x,y,tile_surface)
-					# 	sprite_group.add(sprite)
+
+					elif type == 'platform_anim':
+
+						tile_surface = platform_anim_tile_list[int(val)].convert_alpha()
+						sprite = Platform_Anim(TILESIZE,x,y,tile_surface)
+						sprite_group.add(sprite)
 					
 		return sprite_group
 	def player_setup(self,layout):
@@ -123,6 +117,9 @@ class Level:
 				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
 					player.rect.left = sprite.rect.right
 					# Handle right collision here
+
+		# for sprite in self.boundary.sprites():
+		# 	player.handle_collision(sprite)
 
 		# self.detect_top_left_slant_collision()
 	def vertical_collision(self):
@@ -187,15 +184,19 @@ class Level:
 	# def detect_bottom_left_slant_collision(self):
 	# 	player = self.player.sprite
 	# 	for sprite in self.slant_tiles1_layout.sprites():
-			
+	
 	
 	def run(self):
 		self.display_surface.fill((255,255,255,255))
 		self.bg.draw(self.display_surface)
 		self.boundary.draw(self.display_surface)
+		# for sprite in  self.boundary:
+		# 	sprite.draw_mask(self.display_surface)
+		
 		self.level.draw(self.display_surface)
 		self.platform.draw(self.display_surface)
 		self.home.draw(self.display_surface)
+		self.platform_anim.draw(self.display_surface)
   		
   
 		# self.outline.draw(self.display_surface)	
@@ -206,4 +207,7 @@ class Level:
 		self.vertical_collision()
 		# self.detect_top_left_slant_collision()
 		self.player.draw(self.display_surface)
+		
+		# for sprite in self.player:
+		# 	sprite.draw_mask(self.display_surface)
 		pygame.display.flip()

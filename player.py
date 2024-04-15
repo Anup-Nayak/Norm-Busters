@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
 		self.can_change = False
 		self.status = 'idle_right' 
 		self.jump()
+		# self.mask = pygame.mask.from_surface(self.image)
   
 	def import_character_assets(self):
 		character_path = './assets/Player/'
@@ -140,10 +141,38 @@ class Player(pygame.sprite.Sprite):
 		else:
 			self.rect.height = 80
 			self.rect.width = 40
-		 
+	
 	def update(self):
 		self.get_input()
 		self.get_status()
 		debug(self.can_change)
 		self.animate()
 		self.adjust_rect_for_gender()
+
+	# def draw(self, surface):
+	# 	surface.blit(self.image, self.rect)
+
+	# def draw_mask(self, surface):
+	# 	self.mask = pygame.mask.from_surface(self.image)
+	# 	surface.blit(self.mask.to_surface(), self.rect)
+
+	# def handle_collision(self, sprite):
+    #     # Check for collision
+	# 	if pygame.sprite.collide_mask(self, sprite):
+    #         # Calculate the overlap area
+	# 		overlap_area = self.mask.overlap_area(sprite.mask, (sprite.rect.x - self.rect.x, sprite.rect.y - self.rect.y))
+
+    #         # If there is an overlap, handle collision
+	# 		if overlap_area > 0:
+	# 			offset_x = (self.rect.x + self.rect.width / 2) - (sprite.rect.x + sprite.rect.width / 2)
+	# 			offset_y = (self.rect.y + self.rect.height / 2) - (sprite.rect.y + sprite.rect.height / 2)
+
+    #             # Adjust player's position with the calculated offset
+	# 			# self.rect.x += offset_x
+	# 			# self.rect.y += offset_y
+	# 			if abs(offset_x) > abs(offset_y):
+	# 				self.rect.x += offset_x
+	# 			else:
+	# 				self.rect.y += offset_y
+	
+                
