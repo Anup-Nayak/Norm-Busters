@@ -1,6 +1,7 @@
 
 from settings import *
 from support import *
+from debug import *
 import pygame
 WHITE = (255, 255, 255,255)
 
@@ -112,3 +113,22 @@ class AnimatedTile(Tile):
 	def update(self):
 		# self.image = self.animations[0].convert_alpha()
 		self.animate()
+  
+  
+class MovingTile(Tile):
+    def __init__(self, size, x, y, surface, speed=1, direction='horizontal'):
+        super().__init__(size, x, y)
+        self.surface = surface
+        self.image = surface.convert_alpha()
+        self.rect = self.image.get_rect(topleft =(x,y))
+        self.speed = speed
+        self.direction = direction
+
+    def update(self):
+        debug(self.rect.x)
+        if self.direction == 'horizontal':
+            self.rect.x += self.speed
+        elif self.direction == 'vertical':
+            self.rect.y += self.speed
+        # self.image = self.surface
+		

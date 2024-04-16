@@ -35,14 +35,17 @@ class Level:
 
 		spikes_layout = import_csv_layout(level_data['Spikes'])
 		self.spikes = self.create_tile_group(spikes_layout,'spikes')
-  
+
+		movingTiles_layout = import_csv_layout(level_data['movingTiles'])
+		self.movingTiles = self.create_tile_group(movingTiles_layout,'movingTiles')
+
 		rewards_layout = import_csv_layout(level_data['rewards'])
 		self.rewards = self.create_tile_group(rewards_layout,'rewards')
 		self.player = pygame.sprite.GroupSingle()
 		self.player_setup()
 
-		self.enemy = pygame.sprite.GroupSingle()
-		self.enemy_setup()
+		# self.enemy = pygame.sprite.GroupSingle()
+		# self.enemy_setup()
 
 	def create_tile_group(self,layout,type):
 		if type == 'background'  :
@@ -57,6 +60,8 @@ class Level:
 			reward_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
 		elif type =='platform_anim':
 			platform_anim_tile_list = import_cut_graphic('./assets/Platform/Cf.png')
+		elif type == 'movingTiles':
+			movingTiles_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		sprite_group = pygame.sprite.Group()
 		for row_index,row in enumerate(layout):
 			for col_index,val in enumerate(row):
@@ -105,7 +110,14 @@ class Level:
 						sprite = AnimatedTile(TILESIZE,x,y,'./assets/Diamond/Coins/',speed = 0.1)
 						sprite_group.add(sprite)
 					
+					elif type == 'movingTiles':
+
+						tile_surface = movingTiles_list[0].convert_alpha()
+						sprite = MovingTile(TILESIZE,x,y,tile_surface)
+						sprite_group.add(sprite)
+					
 		return sprite_group
+
 	def player_setup(self):
 		sprite  = Player((150,650))
 		self.player.add(sprite)
@@ -292,10 +304,16 @@ class Level:
 		self.platform_anim.draw(self.display_surface)
 		self.spikes.draw(self.display_surface)
 		self.rewards.draw(self.display_surface)
+		self.movingTiles.draw(self.display_surface)
+		# self.movingTiles.update()
 		
   
 		for sprite in self.home:
 			sprite.update()
+
+		for sprite in self.movingTiles:
+			sprite.update()
+			
 
 		self.horizontal_collision()
 		self.vertical_collision()
