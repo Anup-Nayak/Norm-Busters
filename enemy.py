@@ -9,8 +9,9 @@ class Enemy(pygame.sprite.Sprite):
 		self.import_character_assets()
 		self.frame_index = 0 
 		self.animation_speed = 0.15
-		self.image = self.animations['idle_right'][self.frame_index]
-		# self.image.fill('black')
+		print(self.animations['idle_right'])
+		self.image = self.animations['idle_right'][0]
+		print(self.animations['idle_right'])
 		self.rect = self.image.get_rect(topleft = (pos[0],pos[1]-55))
 		self.direction = pygame.math.Vector2(0,0)
 		self.gravity = 0.3
@@ -26,30 +27,30 @@ class Enemy(pygame.sprite.Sprite):
 	def import_character_assets(self):
 		character_path = './assets/Player/Enemy'
 		self.animations = {
-			'idle_left': ['1F.png'],
-			'idle_right': ['1F.png'],
-			'run_left': ['Run1G.png','Run2G.png','Run3G.png','Run4G.png','Run5G.png','Run6G.png'],
-			'run_right': ['Run1G.png','Run2G.png','Run3G.png','Run4G.png','Run5G.png','Run6G.png'],
-			'fall_left':['1F.png'],
-			'fall_right':['1F.png'],
-			'jump_left':['1F.png'],
-			'jump_right':['1F.png']	
+			'idle_left': [],
+			'idle_right': [],
+			'run_left': [],
+			'run_right': [],
+			'fall_left':[],
+			'fall_right':[],
+			'jump_left':[],
+			'jump_right':[]	
 		}
 		
 		for animation in self.animations.keys():
 			full_path = character_path + '/' + animation
 			self.animations[animation] = import_folder(full_path)
-
-			for image in enumerate(self.animations[animation]):
+			for i,image in enumerate(self.animations[animation]):
 				scaled_image = pygame.transform.scale(image, (int(80*image.get_width()/image.get_height()), 80))
 				self.animations[animation] = scaled_image
+		print(self.animations)
 			
 	
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
-		if self.status == "run_left" or self.status == "run_right":
-			self.rect.x += 1  
+		# if self.status == "run_left" or self.status == "run_right":
+		# 	self.rect.x += 1  
 		
 		if keys[pygame.K_d]:
 			self.direction.x = self.speed
@@ -96,6 +97,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.frame_index += self.animation_speed
 		if self.frame_index >= len(animations):
 			self.frame_index = 0
+		print(animations)
 		self.image = animations[int(self.frame_index)]
 	
 	def update(self):

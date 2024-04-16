@@ -4,6 +4,7 @@ from settings import TILESIZE
 from tiles import *
 from player import Player
 from debug import debug
+from enemy import *
 
 class Level:
 	
@@ -37,11 +38,11 @@ class Level:
   
 		rewards_layout = import_csv_layout(level_data['rewards'])
 		self.rewards = self.create_tile_group(rewards_layout,'rewards')
-
-		# player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
 		self.player_setup()
-		# print(bg_layout)
+
+		self.enemy = pygame.sprite.GroupSingle()
+		self.enemy_setup()
 
 	def create_tile_group(self,layout,type):
 		if type == 'background'  :
@@ -50,8 +51,6 @@ class Level:
 			floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'platform':
 			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
-		# elif type == 'home':
-			# home_tile_list = import_cut_graphic('./assets/Exit/Door/1f.png')
 		elif type == 'spikes':
 			spike_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
 		elif type == 'rewards':
@@ -103,20 +102,14 @@ class Level:
 					elif type == 'rewards':
 
 						tile_surface = reward_tile_list[0].convert_alpha()
-						sprite = AnimatedTile(TILESIZE,x,y,'./assets/Diamond/Coins/',speed = 0)
+						sprite = AnimatedTile(TILESIZE,x,y,'./assets/Diamond/Coins/',speed = 0.1)
 						sprite_group.add(sprite)
 					
 		return sprite_group
 	def player_setup(self):
-		# for row_index,row in enumerate(layout):
-		# 	for col_index,val in enumerate(row):
-		# 		if val != -1:
-		# 			x = col_index*TILESIZE
-		# 			y = row_index*TILESIZE
-		# 			if val == '0':
 		sprite  = Player((150,650))
 		self.player.add(sprite)
-		# print((x,y))
+	
 	def horizontal_collision(self):
 		player = self.player.sprite
 		player.rect.x += player.direction.x
@@ -134,8 +127,6 @@ class Level:
 		for sprite in self.spikes.sprites():
 			if sprite.rect.colliderect(player.rect):
 				player.can_change = False
-				self.lives -=1
-				self.remove_lives()
 				# self.display_lives()
 				if player.rect.right > sprite.rect.left and player.direction.x > 0:
 					player.rect.right = sprite.rect.left
@@ -144,9 +135,10 @@ class Level:
 				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
 					player.rect.left = sprite.rect.right
 				self.lives -=1
-				for sprite in self.player:
-					sprite.dissappear()
-					self.remove_lives()
+				if player.gender !='Smoke':
+					for sprite in self.player:
+						sprite.dissappear()
+						self.remove_lives()
 				# pygame.quit()
     
 		for sprite in self.home.sprites():
@@ -159,7 +151,7 @@ class Level:
 				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
 					player.rect.left = sprite.rect.right
 
-				pygame.quit()
+				# pygame.quit()
 		
 		for sprite in self.rewards.sprites():
 			if sprite.rect.colliderect(player.rect):
@@ -225,9 +217,11 @@ class Level:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
 				self.lives -=1
-				for sprite in self.player:
-					sprite.dissappear()
-					self.remove_lives()
+				
+				if player.gender !='Smoke':
+					for sprite in self.player:
+						sprite.dissappear()
+						self.remove_lives()
 				# self.display_lives()
     
 		for sprite in self.home.sprites():
@@ -273,7 +267,7 @@ class Level:
 	def display_lives(self):
 		if(self.lives>=0):
 			for i in range(self.lives):
-				self.heart.add(AnimatedTile(TILESIZE,900-25*i,35,'./assets/Lifes/Health'))
+				self.heart.add(AnimatedTile(TILESIZE,900-25*i,35,'./assets/Lifes/Health',speed=0))
 		
 		
 	def update_life(self):
@@ -284,7 +278,8 @@ class Level:
 			self.player.empty()
 			self.player = pygame.sprite.GroupSingle()
 			self.player_setup()
-
+	
+	
 	def run(self):
 		self.display_surface.fill((255,255,255,255))
 		self.bg.draw(self.display_surface)
@@ -312,7 +307,6 @@ class Level:
 		for sprite in self.rewards:
 			sprite.update()
 		self.respawn()
-		# self.heart.update()
 		
 		# for sprite in self.player:
 		# 	sprite.draw_mask(self.display_surface)

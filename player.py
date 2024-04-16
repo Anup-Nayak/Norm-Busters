@@ -163,7 +163,7 @@ class Player(pygame.sprite.Sprite):
 		self.direction.y =0
 		self.respawn_timer = pygame.time.get_ticks()
 	def update(self):
-		if (self.respawn_timer != -1) and (pygame.time.get_ticks() -self.respawn_timer >=1000):
+		if (self.respawn_timer != -1) and (pygame.time.get_ticks() -self.respawn_timer >=1600):
 			self.respawn = True
 		self.get_input()
 		self.get_status()
