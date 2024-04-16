@@ -1,3 +1,6 @@
+
+from settings import *
+from support import *
 import pygame
 WHITE = (255, 255, 255,255)
 
@@ -40,7 +43,38 @@ class OutlineTile(Tile):
 		super().__init__(size,x,y)
 		self.set_image(surface)
 		
+
+
+
+class MovingTile(Tile):
+	def __init__(self,size,x,y,surface):
+		super().__init__(size,x,y)
+		self.image = (surface).convert_alpha()
+		self.rect = self.image.get_rect(topleft = (x,y))
+	def update(self):
+		self.rect.x +=1
+
 class HomeTile(Tile):
+	def __init__(self,size,x,y):
+		super().__init__(size,x,y)
+		self.animation_speed =0
+		self.index = 3
+		self.path = './assets/Exit/Door/'
+		self.import_assets()
+
+	def import_assets(self):
+		self.animations = import_folder(self.path)
+		# print(self.animations)
+	def animate(self):
+		self.index  +=self.animation_speed
+		if(self.index >=len(self.animations)):
+			self.index =0
+		self.image = self.animations[int(self.index)]
+	def update(self):
+		# self.image = self.animations[0].convert_alpha()
+		self.animate()
+
+class SpikeTile(Tile):
 	def __init__(self,size,x,y,surface):
 		super().__init__(size,x,y)
 		self.set_image1(surface)
@@ -56,3 +90,25 @@ class Platform_Anim(Tile):
 				r, g, b, _ = self.image.get_at((x, y))
 				if r <= 10 and g <= 10 and b <= 10:
 					self.image.set_at((x, y), (0, 0, 0, 0))
+
+
+class AnimatedTile(Tile):
+	def __init__(self,size,x,y,path,speed =0.1):
+		super().__init__(size,x,y)
+		self.animation_speed =speed
+		self.index = 0
+		self.path = path
+		self.import_assets()
+	def import_assets(self):
+		# slef.path = './assets/Diamond/Coins/'
+		self.animations = []
+		self.animations = import_folder(self.path)
+		# print(self.animations)
+	def animate(self):
+		self.index  +=self.animation_speed
+		if(self.index >=len(self.animations)):
+			self.index =0
+		self.image = self.animations[int(self.index)]
+	def update(self):
+		# self.image = self.animations[0].convert_alpha()
+		self.animate()

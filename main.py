@@ -10,7 +10,6 @@ class Game:
 		self.screen = pygame.display.set_mode((WIDTH,HEIGHT),pygame.SRCALPHA)
 		self.clock = pygame.time.Clock()
 		self.level = Level(level_0,self.screen)	
-	
 	def run(self):
 		while True:
 			for event in pygame.event.get():

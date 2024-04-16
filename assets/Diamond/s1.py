@@ -12,17 +12,17 @@ def resize_image(image_path, width, height):
         resized_img = img.resize((width, height))
         
         # Save the resized image
-        resized_img.save(os.path.join(os.getcwd(), 'assets/Diamond/Coins/coin3.png').replace("\\", "/"))
+        resized_img.save(os.path.join(os.getcwd() +'/Coins', 'coin6.png').replace("\\", "/"))
         print("Image resized successfully.")
     except Exception as e:
         print("Error:", e)
 
 # Path to the image file you want to resize
-image_path = os.path.join(os.getcwd(), 'assets/Diamond/coin3.png').replace("\\", "/")
+image_path = os.path.join(os.getcwd() +'/Coins', 'coin6.png').replace("\\", "/")
 
 # Dimensions for resizing
-new_width = 180
-new_height = 180
+new_width = 25
+new_height = 25
 
 # Resize the image
 resize_image(image_path, new_width, new_height)

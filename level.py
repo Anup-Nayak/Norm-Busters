@@ -6,8 +6,13 @@ from player import Player
 from debug import debug
 
 class Level:
+	
 	def __init__(self,level_data,surface):
 		self.coins = 0
+		self.lives = 3
+		
+		self.heart = pygame.sprite.Group()
+		self.display_lives()
 		self.display_surface = surface
 		bg_layout =	import_csv_layout(level_data['background'])
 		self.bg = self.create_tile_group(bg_layout,'background')
@@ -33,9 +38,9 @@ class Level:
 		rewards_layout = import_csv_layout(level_data['rewards'])
 		self.rewards = self.create_tile_group(rewards_layout,'rewards')
 
-		player_layout = import_csv_layout(level_data['Player'])
+		# player_layout = import_csv_layout(level_data['Player'])
 		self.player = pygame.sprite.GroupSingle()
-		self.player_setup(player_layout)
+		self.player_setup()
 		# print(bg_layout)
 
 	def create_tile_group(self,layout,type):
@@ -45,8 +50,8 @@ class Level:
 			floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
 		elif type == 'platform':
 			platform_tile_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
-		elif type == 'home':
-			home_tile_list = import_cut_graphic('./assets/home/home1.jpg')
+		# elif type == 'home':
+			# home_tile_list = import_cut_graphic('./assets/Exit/Door/1f.png')
 		elif type == 'spikes':
 			spike_tile_list = import_cut_graphic('./assets/Spikes/spikeF.png')
 		elif type == 'rewards':
@@ -79,8 +84,8 @@ class Level:
       
 					elif type =='home':
 						
-						tile_surface = home_tile_list[int(val)].convert_alpha()
-						sprite = HomeTile(TILESIZE,x,y,tile_surface)
+						# tile_surface = home_tile_list[int(val)].convert_alpha()
+						sprite = HomeTile(TILESIZE,x,y)
 						sprite_group.add(sprite)
 
 					elif type == 'platform_anim':
@@ -92,26 +97,26 @@ class Level:
 					elif type == 'spikes':
 
 						tile_surface = spike_tile_list[int(val)].convert_alpha()
-						sprite = HomeTile(TILESIZE,x,y,tile_surface)
+						sprite = SpikeTile(TILESIZE,x,y,tile_surface)
 						sprite_group.add(sprite)
       
 					elif type == 'rewards':
 
 						tile_surface = reward_tile_list[0].convert_alpha()
-						sprite = HomeTile(TILESIZE,x,y,tile_surface)
+						sprite = AnimatedTile(TILESIZE,x,y,'./assets/Diamond/Coins/',speed = 0)
 						sprite_group.add(sprite)
 					
 		return sprite_group
-	def player_setup(self,layout):
-		for row_index,row in enumerate(layout):
-			for col_index,val in enumerate(row):
-				if val != -1:
-					x = col_index*TILESIZE
-					y = row_index*TILESIZE
-					if val == '0':
-						sprite  = Player((x,y))
-						self.player.add(sprite)
-						# print('player goes here')
+	def player_setup(self):
+		# for row_index,row in enumerate(layout):
+		# 	for col_index,val in enumerate(row):
+		# 		if val != -1:
+		# 			x = col_index*TILESIZE
+		# 			y = row_index*TILESIZE
+		# 			if val == '0':
+		sprite  = Player((150,650))
+		self.player.add(sprite)
+		# print((x,y))
 	def horizontal_collision(self):
 		player = self.player.sprite
 		player.rect.x += player.direction.x
@@ -129,14 +134,20 @@ class Level:
 		for sprite in self.spikes.sprites():
 			if sprite.rect.colliderect(player.rect):
 				player.can_change = False
+				self.lives -=1
+				self.remove_lives()
+				# self.display_lives()
 				if player.rect.right > sprite.rect.left and player.direction.x > 0:
 					player.rect.right = sprite.rect.left
 
 				
 				elif player.rect.left < sprite.rect.right and player.direction.x < 0:
 					player.rect.left = sprite.rect.right
-
-				pygame.quit()
+				self.lives -=1
+				for sprite in self.player:
+					sprite.dissappear()
+					self.remove_lives()
+				# pygame.quit()
     
 		for sprite in self.home.sprites():
 			if sprite.rect.colliderect(player.rect):
@@ -163,9 +174,6 @@ class Level:
 				self.rewards.remove(sprite)
 				self.coins += 1
 				
-		
-
-		
 	def vertical_collision(self):
 		player = self.player.sprite
 		player.rect.y += player.direction.y
@@ -216,7 +224,11 @@ class Level:
 				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
-				pygame.quit()
+				self.lives -=1
+				for sprite in self.player:
+					sprite.dissappear()
+					self.remove_lives()
+				# self.display_lives()
     
 		for sprite in self.home.sprites():
 			
@@ -251,14 +263,35 @@ class Level:
 				self.rewards.remove(sprite)
 				self.coins += 1
 	
-	
+	def remove_lives(self):
+		# if(self.lives>=0):
+		sprite_list =self.heart.sprites()
+		if sprite_list:
+			last_sprite = sprite_list[-1]
+			self.heart.remove(last_sprite)
+
+	def display_lives(self):
+		if(self.lives>=0):
+			for i in range(self.lives):
+				self.heart.add(AnimatedTile(TILESIZE,900-25*i,35,'./assets/Lifes/Health'))
+		
+		
+	def update_life(self):
+		for sprite in self.heart:
+			sprite.update()
+	def respawn(self):
+		if self.player.sprite.respawn == True:
+			self.player.empty()
+			self.player = pygame.sprite.GroupSingle()
+			self.player_setup()
+
 	def run(self):
 		self.display_surface.fill((255,255,255,255))
 		self.bg.draw(self.display_surface)
 		self.boundary.draw(self.display_surface)
-		# for sprite in  self.boundary:
-		# 	sprite.draw_mask(self.display_surface)
 		
+		self.update_life()
+		self.heart.draw(self.display_surface)
 		self.level.draw(self.display_surface)
 		self.platform.draw(self.display_surface)
 		self.home.draw(self.display_surface)
@@ -267,17 +300,24 @@ class Level:
 		self.rewards.draw(self.display_surface)
 		
   
-		# self.outline.draw(self.display_surface)	
-		# self.slant_tiles1_layout.draw(self.display_surface)
-		self.player.update()
+		for sprite in self.home:
+			sprite.update()
 
 		self.horizontal_collision()
 		self.vertical_collision()
 		# self.detect_top_left_slant_collision()
-		self.player.draw(self.display_surface)
+		if self.player:
+			self.player.draw(self.display_surface)
+		
+		for sprite in self.rewards:
+			sprite.update()
+		self.respawn()
+		# self.heart.update()
 		
 		# for sprite in self.player:
 		# 	sprite.draw_mask(self.display_surface)
+		if self.player: 
+			self.player.update()
 		pygame.display.flip()
 
-		debug(self.coins)
+		# debug(self.coins)
