@@ -238,7 +238,6 @@ class Level:
 				elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
 					player.rect.top = sprite.rect.bottom
 					player.direction.y = -0.5*player.direction.y
-				pygame.quit()
 				
 		for sprite in self.rewards.sprites():
 			
