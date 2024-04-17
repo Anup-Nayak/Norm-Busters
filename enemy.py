@@ -9,16 +9,16 @@ class Enemy(pygame.sprite.Sprite):
 		self.import_character_assets()
 		self.frame_index = 0 
 		self.animation_speed = 0.15
-		print(self.animations['idle_right'])
+		# print(self.animations['idle_right'])
 		self.image = self.animations['idle_right'][0]
-		print(self.animations['idle_right'])
-		self.rect = self.image.get_rect(topleft = (pos[0],pos[1]-55))
+		# print(self.animations['idle_right'])
+		self.rect = self.image.get_rect(topleft = (pos[0],pos[1]-50))
 		self.direction = pygame.math.Vector2(0,0)
 		self.gravity = 0.3
-		self.jump_speed = -9
+		self.jump_speed = 0
 		self.idle_state = '_right'
 		self.on_ground = True
-		self.speed = 7
+		self.speed = 6
 		self.timer = pygame.time.get_ticks() 
 		self.can_change = False
 		self.status = 'idle_right' 
@@ -39,30 +39,21 @@ class Enemy(pygame.sprite.Sprite):
 		
 		for animation in self.animations.keys():
 			full_path = character_path + '/' + animation
+			# print(full_path)
 			self.animations[animation] = import_folder(full_path)
-			for i,image in enumerate(self.animations[animation]):
-				scaled_image = pygame.transform.scale(image, (int(80*image.get_width()/image.get_height()), 80))
-				self.animations[animation] = scaled_image
-		print(self.animations)
+			# for i,image in enumerate(self.animations[animation]):
+			# 	scaled_image = pygame.transform.scale(image, (int(80*image.get_width()/image.get_height()), 80))
+			# 	self.animations[animation] = scaled_image
+		# print(self.animations)
 			
 	
 	def get_input(self):
 		keys = pygame.key.get_pressed()
 
-		# if self.status == "run_left" or self.status == "run_right":
-		# 	self.rect.x += 1  
-		
-		if keys[pygame.K_d]:
+		if self.status != 'jump_right': 
 			self.direction.x = self.speed
 			self.idle_state = '_right'
-		elif keys[pygame.K_a]:
-			self.direction.x = -1*self.speed
-			self.idle_state = '_left'
-		else:
-			self.direction.x = 0
 		
-		if keys[pygame.K_w]:
-			self.jump()
 	
 	def jump(self):
 		if (self.status != 'jump_left') and (self.status != 'jump_right') and (self.status != 'fall_left') and (self.status != 'fall_right') and (self.direction.y ==0):
@@ -97,10 +88,11 @@ class Enemy(pygame.sprite.Sprite):
 		self.frame_index += self.animation_speed
 		if self.frame_index >= len(animations):
 			self.frame_index = 0
-		print(animations)
+		# print(animations)
 		self.image = animations[int(self.frame_index)]
 	
 	def update(self):
+		# print(self.rect)
 		self.get_input()
 		self.get_status()
 		self.animate()	

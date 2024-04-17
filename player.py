@@ -11,27 +11,25 @@ class Player(pygame.sprite.Sprite):
 		self.respawn_timer = -1
 		self.frame_index = 0 
 		self.animation_speed = {
-			'Boy':0.15,
+			'Boy': 0.15,
 			'Girl': 0.30
 		}
 		self.image = self.animations['Boy']['idle_right'][self.frame_index]
-		# self.image.fill('black')
 		self.rect = self.image.get_rect(topleft = (pos[0],pos[1]-55))
 		self.direction = pygame.math.Vector2(0,0)
 		self.gravity = {
-			'Boy':0.3,
-			'Girl':0.3
+			'Boy': 0.3,
+			'Girl': 0.3
 		}
 		self.jump_speed = {'Boy':-7.7,'Girl': -8.8}
 		self.idle_state = '_right'
 		self.on_ground = True
-		self.gender = "Girl"
+		self.gender = "Boy"
 		self.speed = {'Boy':5,"Girl":6}
 		self.timer = pygame.time.get_ticks() 
 		self.can_change = False
 		self.status = 'idle_right' 
 		self.jump()
-		# self.mask = pygame.mask.from_surface(self.image)
   
 	def import_character_assets(self):
 		character_path = './assets/Player/'
@@ -163,7 +161,7 @@ class Player(pygame.sprite.Sprite):
 		self.direction.y =0
 		self.respawn_timer = pygame.time.get_ticks()
 	def update(self):
-		if (self.respawn_timer != -1) and (pygame.time.get_ticks() -self.respawn_timer >=1000):
+		if (self.respawn_timer != -1) and (pygame.time.get_ticks() -self.respawn_timer >=1600):
 			self.respawn = True
 		self.get_input()
 		self.get_status()

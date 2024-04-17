@@ -41,11 +41,13 @@ class Level:
 
 		rewards_layout = import_csv_layout(level_data['rewards'])
 		self.rewards = self.create_tile_group(rewards_layout,'rewards')
+
+
 		self.player = pygame.sprite.GroupSingle()
 		self.player_setup()
-
-		# self.enemy = pygame.sprite.GroupSingle()
-		# self.enemy_setup()
+		
+		self.enemy = pygame.sprite.GroupSingle()
+		self.enemy_spawn = False
 
 	def create_tile_group(self,layout,type):
 		if type == 'background'  :
@@ -177,6 +179,18 @@ class Level:
 
 				self.rewards.remove(sprite)
 				self.coins += 1
+
+
+		if self.enemy:
+			if self.enemy.sprite.rect.x >= player.rect.x  and (player.rect.y <= self.enemy.sprite.rect.y +70) and (player.rect.y >= self.enemy.sprite.rect.y-70) :
+				
+				self.lives -=1
+				if player.gender !='Smoke':
+					for sprite in self.player:
+						sprite.dissappear()
+						self.remove_lives()
+						self.enemy.empty()
+						self.enemy_spawn = False
 				
 	def vertical_collision(self):
 		player = self.player.sprite
@@ -268,6 +282,11 @@ class Level:
 				self.rewards.remove(sprite)
 				self.coins += 1
 	
+	def enemy_setup(self):
+		sprite  = Enemy((self.player.sprite.rect.x-110,697))
+		self.enemy_spawn = True
+		self.enemy.add(sprite)
+	
 	def remove_lives(self):
 		# if(self.lives>=0):
 		sprite_list = self.heart.sprites()
@@ -290,6 +309,65 @@ class Level:
 			self.player = pygame.sprite.GroupSingle()
 			self.player_setup()
 	
+
+
+		
+	def enemy_horizontal_collision(self):
+		enemy = self.enemy.sprite
+		# if enemy.rect.x >=760:
+		# 	return
+		if enemy.rect.x + enemy.direction.x >=760:
+			pass
+		else:
+			enemy.rect.x += enemy.direction.x
+
+		for sprite in self.boundary.sprites():
+			if sprite.rect.colliderect(enemy.rect):
+				enemy.can_change = False
+				if enemy.rect.right > sprite.rect.left and enemy.direction.x > 0:
+					enemy.rect.right = sprite.rect.left
+					# enemy.speed = 0
+
+				
+				elif enemy.rect.left < sprite.rect.right and enemy.direction.x < 0:
+					enemy.rect.left = sprite.rect.right
+		
+		
+		
+		
+		
+	def enemy_vertical_collision(self):
+		enemy = self.enemy.sprite
+		enemy.rect.y += enemy.direction.y
+		enemy.apply_gravity()
+		# Check collision with outline tiles
+		for sprite in self.boundary.sprites() :
+			if sprite.rect.colliderect(enemy.rect):
+				enemy.can_change = False
+				
+				if enemy.rect.bottom > sprite.rect.top and enemy.direction.y > 0:
+					enemy.rect.bottom = sprite.rect.top
+					enemy.direction.y = 0
+                    			
+					
+
+				elif enemy.rect.top < sprite.rect.bottom and enemy.direction.y < 0:
+					enemy.rect.top = sprite.rect.bottom
+					enemy.direction.y = -0.5*enemy.direction.y
+					
+		for sprite in self.platform.sprites() :
+			
+			if sprite.rect.colliderect(enemy.rect):
+				if enemy.rect.bottom > sprite.rect.top and enemy.direction.y >= 0:
+					enemy.rect.bottom = sprite.rect.top
+					enemy.direction.y = 0
+					enemy.can_change = True
+
+				
+				elif enemy.rect.top < sprite.rect.bottom and enemy.direction.y < 0:
+					enemy.rect.top = sprite.rect.bottom
+					enemy.direction.y = -0.5*enemy.direction.y
+			
 	
 	def run(self):
 		self.display_surface.fill((255,255,255,255))
@@ -320,6 +398,19 @@ class Level:
 		# self.detect_top_left_slant_collision()
 		if self.player:
 			self.player.draw(self.display_surface)
+		if self.enemy_spawn == False and self.player.sprite.rect.x >= 200 and self.player.sprite.gender =='Girl':
+			self.enemy_setup()
+		
+		if self.player.sprite.gender !='Girl':
+			self.enemy.empty()
+			self.enemy_spawn = False
+
+		if self.enemy:
+			# print(self.enemy.sprite.rect)
+			self.enemy.update()
+			self.enemy_horizontal_collision()
+			self.enemy_vertical_collision()
+			self.enemy.draw(self.display_surface)	
 		
 		for sprite in self.rewards:
 			sprite.update()
