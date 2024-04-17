@@ -270,7 +270,7 @@ class Level:
 	
 	def remove_lives(self):
 		# if(self.lives>=0):
-		sprite_list =self.heart.sprites()
+		sprite_list = self.heart.sprites()
 		if sprite_list:
 			last_sprite = sprite_list[-1]
 			self.heart.remove(last_sprite)
