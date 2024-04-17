@@ -125,7 +125,7 @@ class MovingTile(Tile):
         self.direction = direction
 
     def update(self):
-        debug(self.rect.x)
+        # debug(self.rect.x)
         if self.direction == 'horizontal':
             self.rect.x += self.speed
         elif self.direction == 'vertical':
