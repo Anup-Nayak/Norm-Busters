@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0372)https://fledge.as.criteo.com/interest-group?data=3G9dGHxaMGN0OE5ZeG11SXk5VXlOZnhlYytUN0tWS2hMY2wyQVAzeUtyY0IzZmhnNWw0c2lsQlNONlc4WkdxaktvMDRPYmZiNmZjRTdTaU4zQ292QVdYbi9hNVRna21wYi9KNU5zOXhHVUlLNFVPV0lyUU8zcldHVzhMUlNWZnpNZUNhWGRWdFp0UVhyY25Wc1gyV1pUQ1dIM1hoMExWVUlNdUJQYm9kNXh4NWV3T1NsREEvMWxFVTVJRTkzZWVSOXdkR0IybEVGNWQycVE1ZUFVVWJ6WWx3Uy85Y1VhNWJRdk5Pc0IwQ0dtWW5MamU4PXw -->
+<html lang="en" class="hydrated"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <!-- Chrome origin trial token -->
+    <meta http-equiv="origin-trial" content="AnolOEEMEnMaCvmUcw/eijaA/Ntx4pke43TW8O1+XFxTL7yMSzmBnkPrjQ33sKmqvREEpLQOE72gUMzHLu9KiAoAAABseyJvcmlnaW4iOiJodHRwczovL2NyaXRlby5jb206NDQzIiwiZmVhdHVyZSI6IlByaXZhY3lTYW5kYm94QWRzQVBJcyIsImV4cGlyeSI6MTY5NTE2Nzk5OSwiaXNTdWJkb21haW4iOnRydWV9">
+<script src="chrome-extension://nngceckbapebfimnlniiiahkandclblb/content/fido2/page-script.js" id="bw-fido2-page-script"></script><script src="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-email-notifier/sqrx-email-notifier.esm.js" type="module" data-resources-url="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-email-notifier/" data-stencil-namespace="sqrx-email-notifier" id="sqrx-email-notifier"></script><script src="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-dialog/sqrx-dialog.esm.js" type="module" data-resources-url="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-dialog/" data-stencil-namespace="sqrx-dialog" id="sqrx-dialog"></script><script src="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-notification-bar/sqrx-notification-bar.esm.js" type="module" data-resources-url="chrome-extension://kapjaoifikajdcdehfdlmojlepfpkpoe/sqrx-notification-bar/" data-stencil-namespace="sqrx-notification-bar" id="sqrx-notification-bar"></script></head>
+<body>
+
+<script>
+    function getBswIg() {
+        const elt = document.createElement("iframe");
+        elt.allow = "join-ad-interest-group";
+        elt.width = "0";
+        elt.height = "0";
+        elt.style.display = "none";
+        elt.title = "BSW IG";
+        elt.src = "https://dsp-paapi-sandbox.bsw-ig.criteo.com/paapi/dsp/html/index";
+
+        document.body.appendChild(elt);
+    }
+
+    if (!navigator.joinAdInterestGroup) {
+        console.log("No fledge for you!");
+    } else {
+        var igs = [{"owner":"https://fledge.as.criteo.com","name":"yf8LVXw2VEhHRHlsQ21yZDVHMDdOdElLVThnPT18","lifetimeMs":2592000000,"priorityVector":{"browserSignals.ageInMinutes":-1,"browserSignals.one":-86400},"biddingLogicURL":"https://fledge.as.criteo.com/simplebid?platform=as","biddingWasmHelperURL":"https://fledge.as.criteo.com/criteo.wasm","trustedBiddingSignalsURL":"https://fledge.as.criteo.com/getvalues","trustedBiddingSignalsKeys":["tG90DHxaMGN0OE5ZeG11SXk5VXlOZnhlYytmZjV2N2hudGtBeVRYQko5citTUWI3VkowdkpGR2RKNndHVXV4bzVPa2hhbTJWdUxYMmFMS0FVRzNKcjVudVg5TzMxaHMrSzdudkJmdnpRRndmRTFHaktNMU90ZS8raEtmbWZYZWhNL05NMTc2T3d6RFNxVGh3YlIvY1Ryalo0R2UxU3J1Q1lhMVRML1J0MHdQZ0VZd2FsQVZHWDJlODFoN01DL0FndmNBZ1J8"],"userBiddingSignals":{},"updateURL":"https://fledge.as.criteo.com/interest-group/update?key=iTLmdHxaMGN0OE5ZeG11SXk5VXlOZnhlYytjNDZlSTRFazVWZTVyaFlmVklLN0FRNzNhUFBWOGZBYldUVFZBcGNIOGJxeUlQd01VRnpyWlBIbEdUVWNpZldlK05ML0dWSGIxa1dBcEtXU0F5QVpaYnM2cHFnMUtGclc3dUJFNVhVRVRyem9TN2pWQkRhV2xRUDlYNG5HNlFXbmd3MlRMMUNXYURDODJ6ckNKVERjOUpadzNLdUxQZjBjcXEveW9VcjVMcjV8","ads":[],"adComponents":[],"trustedBiddingSignalsSlotSizeMode":"slot-size","executionMode":"group-by-origin"}];
+        var expiration = 2592000;
+        var errorEndpoint = "https://fledge.as.criteo.com/interest-group/error?pid=22345";
+        if (navigator.joinAdInterestGroup.length == 1) {
+            for (const ig of igs) {
+                navigator.joinAdInterestGroup(ig).catch((e) => fetch(`${errorEndpoint}&message=${encodeError(e)}`));
+            }
+        } else {
+            // This is for backwards-compatibility
+            // The 1 - arg implementation is future - proof
+            for (const ig of igs) {
+                navigator.joinAdInterestGroup(ig, expiration).catch((e) => fetch(`${errorEndpoint}&message=${encodeError(e)}`));
+            }
+        }
+        if (false) {
+            getBswIg();
+        }
+    }
+
+    function encodeError(error) {
+        return encodeURIComponent(error.name + ':' + error.message);
+    }
+
+    async function measureAudienceSize() {
+        // Measuring audience size
+        // Register worklet
+        if((!window?.sharedStorage?.worklet?.addModule) || (!window?.sharedStorage?.run)){
+            return;
+        }
+        await window.sharedStorage.worklet.addModule('');
+
+        // Run audience size measurement operation
+        await window.sharedStorage.run('audience-size-measurement', {
+            data: { bucketKey: BigInt('715044'), contributionValue: 8192}
+        });
+    }
+
+    //TODO reactivate audience-size-measurement
+    //measureAudienceSize();
+
+</script>
+
+
+<div id="sqrx-content-container"><div class="squarex_ext_modal"><div class="squarex_ext_dialog-container"></div></div></div></body></html>

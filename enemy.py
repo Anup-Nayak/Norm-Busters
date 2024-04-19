@@ -8,7 +8,7 @@ class Enemy(pygame.sprite.Sprite):
 		super().__init__()
 		self.import_character_assets()
 		self.frame_index = 0 
-		self.animation_speed = 0.15
+		self.animation_speed = 0.30
 		# print(self.animations['idle_right'])
 		self.image = self.animations['idle_right'][0]
 		# print(self.animations['idle_right'])
@@ -25,7 +25,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.jump()
   
 	def import_character_assets(self):
-		character_path = './assets/Player/Enemy'
+		character_path = './assets/Player/Enemy1'
 		self.animations = {
 			'idle_left': [],
 			'idle_right': [],

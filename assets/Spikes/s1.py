@@ -12,14 +12,17 @@ def resize_image(image_path, width, height):
         resized_img = img.resize((width, height))
         
         # Save the resized image
-        resized_img.save(os.path.join(os.getcwd(),'spikeA.png').replace("\\", "/"))
+        resized_img.save(os.path.join(os.getcwd()+'/Rotating/', '6.png').replace("\\", "/"))
         print("Image resized successfully.")
     except Exception as e:
         print("Error:", e)
 
-image_path = os.path.join(os.getcwd(), 'spike.png').replace("\\", "/")
+# Path to the image file you want to resize
+image_path = os.path.join(os.getcwd()+'/Rotating/', '6.png').replace("\\", "/")
 
-new_width = 180
-new_height = 180
+# Dimensions for resizing
+new_width = 75
+new_height = 75
+
 # Resize the image
 resize_image(image_path, new_width, new_height)

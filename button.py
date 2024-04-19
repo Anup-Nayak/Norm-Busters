@@ -1,7 +1,7 @@
 import pygame
 
 class Button():
-	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
+	def __init__(self, image, pos, text_input, font, base_color, hovering_color,transparent=False):
 		self.image = pygame.image.load(image).convert_alpha() if image else None
 		self.x_pos = pos[0]
 		self.y_pos = pos[1]
@@ -12,6 +12,8 @@ class Button():
 		if self.image is None:
 			self.image = pygame.Surface((200, 50))  # Create a blank surface if no image provided
 			self.image.fill((255, 255, 255))  # Fill with white color			
+		if transparent:
+			self.image.set_alpha(0)
 		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
 		self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 

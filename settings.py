@@ -1,4 +1,3 @@
-WIDTH = 1280
 FPS = 60
 TILESIZE = 25
 vertical_tile_number = 29
