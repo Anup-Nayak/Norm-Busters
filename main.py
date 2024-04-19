@@ -162,7 +162,7 @@ class Game:
                 if pause_action == "resume":
                     self.state = "play"  
                 elif pause_action == "restart":
-                    self.level = LevelMap(level_0, self.screen)  
+                    self.level = Level(level_0, self.screen)  
                     self.state = "play"  
                 elif pause_action == "home":
                     self.state = "menu"
@@ -185,6 +185,15 @@ class Game:
                         
                 self.screen.fill((255, 255, 255, 255))
                 self.level.run()
+                playState = self.level.updateState()
+                if playState == "complete":
+                    self.level = Level(level_0, self.screen)  
+                    self.state = "menu"
+                    self.level.playState = None
+                elif playState == "over":
+                    self.level = Level(level_0, self.screen)  
+                    self.state = "menu"
+                    self.level.playState = None
                 pygame.display.flip()
                 self.clock.tick(FPS)
 

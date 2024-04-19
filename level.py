@@ -15,7 +15,7 @@ class Level:
         self.heart = pygame.sprite.Group()
         self.display_lives()
         self.display_surface = surface
-
+        self.playState = None
 
         self.background_image = pygame.image.load("./assets/bg/bg8.png").convert()
         # bg_layout =	import_csv_layout(level_data['background'])
@@ -193,7 +193,7 @@ class Level:
                 
                 elif player.rect.left < sprite.rect.right and player.direction.x < 0:
                     player.rect.left = sprite.rect.right
-
+                self.playState = "complete"
                 # pygame.quit()
         
         for sprite in self.rewards.sprites():
@@ -355,7 +355,8 @@ class Level:
         if sprite_list:
             last_sprite = sprite_list[-1]
             self.heart.remove(last_sprite)
-
+        if self.lives == 0:
+            self.playState = "over"
     def display_lives(self):
         if(self.lives>=0):
             for i in range(self.lives):
@@ -490,3 +491,11 @@ class Level:
         pygame.display.flip()
 
         # debug(self.coins)
+    
+    def updateState(self):
+        if self.playState:
+            return self.playState
+        if self.playState == "over":
+            return "over"
+        elif self.playState == "complete":
+            return "complete"
