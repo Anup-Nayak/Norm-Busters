@@ -52,7 +52,6 @@ class LevelMap:
             if self.clicked_button:  # Check if a button has been clicked
                 return self.clicked_button  # Return the clicked button
 
-
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
@@ -89,7 +88,6 @@ class MainMenu:
             self.level_button.update(self.screen)
             self.quit_button.update(self.screen)
             pygame.display.flip()
-
 
 class PauseMenu:
     def __init__(self, screen):
@@ -138,7 +136,6 @@ class PauseMenu:
             
             if self.clicked_button:  
                 return self.clicked_button 
-
 
 class Completed:
     def __init__(self, screen):
@@ -235,7 +232,9 @@ class Game:
         self.pause_menu = PauseMenu(self.screen)  # Added pause menu
         self.completed_menu = Completed(self.screen)
         self.over_menu = Over(self.screen)
-        self.level = Level(level_1, self.screen,type = 'Level 1')
+        self.levelNumber = level_0
+        self.levelText = 'Level 0'
+        self.level = Level(self.levelNumber, self.screen, type = self.levelText)
         self.levelMap = LevelMap(self.screen)  # This will be set based on the selected level
 
     def run(self):
@@ -247,7 +246,7 @@ class Game:
                 if pause_action == "resume":
                     self.state = "play"  
                 elif pause_action == "restart":
-                    self.level = Level(level_1, self.screen,type ='Level 0')  
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
                     self.state = "play"  
                 elif pause_action == "home":
                     self.state = "menu"
@@ -259,6 +258,24 @@ class Game:
                 level_number = self.levelMap.run()
                 # print(level_number)
                 if level_number == "level0":
+                    self.levelNumber = level_0
+                    self.levelText = 'Level 0'
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
+                    self.state = "play"
+                elif level_number == "level1":
+                    self.levelNumber = level_1
+                    self.levelText = 'Level 1'
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
+                    self.state = "play"
+                elif level_number == "level2":
+                    self.levelNumber = level_2
+                    self.levelText = 'Level 2'
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
+                    self.state = "play"
+                elif level_number == "level3":
+                    self.levelNumber = level_3
+                    self.levelText = 'Level 3'
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
                     self.state = "play"
                 else:
                     self.state = "menu"
@@ -276,11 +293,11 @@ class Game:
                 self.level.run()
                 playState = self.level.updateState()
                 if playState == "complete":
-                    self.level = Level(level_1, self.screen,type = 'Level 1')  
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
                     self.state = "complete"
                     self.level.playState = None
                 elif playState == "over":
-                    self.level = Level(level_1, self.screen,type = 'Level 1')  
+                    self.level = Level(self.levelNumber, self.screen,type =self.levelText)  
                     self.state = "over"
                     self.level.playState = None
                 pygame.display.flip()

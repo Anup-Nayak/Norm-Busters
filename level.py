@@ -380,6 +380,8 @@ class Level:
 
         
     def enemy_horizontal_collision(self):
+        if self.enemy == None:
+            return
         enemy = self.enemy.sprite
         # if enemy.rect.x >=760:
         # 	return
@@ -411,6 +413,8 @@ class Level:
         
         
     def enemy_vertical_collision(self):
+        if self.enemy == None:
+            return
         enemy = self.enemy.sprite
         enemy.rect.y += enemy.direction.y
         enemy.apply_gravity()
