@@ -7,6 +7,10 @@ Group Members:
 - Abhishek (2022CS11598)
 - Anup (2022CS51827)
 
+## ppt
+
+``` https://docs.google.com/presentation/d/10dP3XdaJ0udEoMPLQcGvJdAd80lQIAxQhJRdbLAnxxI/edit?usp=sharing ```
+
 ## Installation
 
 - clone the repo using git clone
