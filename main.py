@@ -60,10 +60,12 @@ class MainMenu:
         self.background.set_alpha(alpha_value)
         font = pygame.font.Font("assets/MainMenu/font.ttf", 60)
         font1 = pygame.font.Font("assets/MainMenu/font.ttf", 100)
+        font2 = pygame.font.Font("assets/MainMenu/font.ttf", 30)
         self.no_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 250), "Norm Busters", font1, (255, 255, 255), (255, 255, 255),True)
         self.play_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 50), "Play", font, (255, 255, 255), (100, 100, 100),True)
         self.level_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 50), "Level", font, (255, 255, 255), (100, 100, 100),True)
         self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 150), "Quit", font, (255, 255, 255), (100, 100, 100),True)
+        # self.instruction_button = Button("assets/MainMenu/banner.png", (50, HEIGHT/2 + 320), "info", font2, (255, 255, 255), (100, 100, 100),True)
 
     def run(self):
         while True:
@@ -77,6 +79,9 @@ class MainMenu:
                     elif self.level_button.checkForInput(event.pos):
                         # print("level")
                         return "levelMap"
+                    # elif self.instruction_button.checkForInput(event.pos):
+                    #     # print("hi")
+                    #     return "instruction"
                     elif self.quit_button.checkForInput(event.pos):
                         pygame.quit()
                         sys.exit()
@@ -84,12 +89,14 @@ class MainMenu:
                     self.play_button.changeColor(event.pos)
                     self.level_button.changeColor(event.pos)
                     self.quit_button.changeColor(event.pos)
+                    # self.instruction_button.changeColor(event.pos)
 
             self.screen.blit(self.background, (0, 0))  
             self.no_button.update(self.screen)
             self.play_button.update(self.screen)
             self.level_button.update(self.screen)
             self.quit_button.update(self.screen)
+            # self.instruction_button.update(self.screen)
             pygame.display.flip()
 
 class PauseMenu:
@@ -233,6 +240,7 @@ class Over:
             if self.clicked_button:  
                 return self.clicked_button  
 
+    
 class Game:
     def __init__(self):
         pygame.init()
@@ -248,6 +256,7 @@ class Game:
         self.pause_menu = PauseMenu(self.screen)  
         self.completed_menu = Completed(self.screen)
         self.over_menu = Over(self.screen)
+        # self.instruction_menu = Instruction(self.screen)
         self.levelNumbers = [level_0,level_1,level_2,level_3]
         self.levelTexts = ['Level 0','Level 1','Level 2','Level 3']
         self.levelIndex = 0
@@ -257,6 +266,7 @@ class Game:
     def run(self):
         while True:
             if self.state == "menu":
+                # print(self.main_menu.run())
                 self.state = self.main_menu.run()
             elif self.state == "pause":  
                 pause_action = self.pause_menu.run()  
@@ -274,6 +284,8 @@ class Game:
                     self.state = "play"
                 else:
                     self.state = self.completed_menu.run()
+            # elif self.state == "instruction":
+            #     self.state = self.instruction_menu.run()
             elif self.state == "over":
                 self.state = self.over_menu.run()
             elif self.state == "levelMap":

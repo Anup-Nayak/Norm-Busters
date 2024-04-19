@@ -18,14 +18,10 @@ class Level:
         self.playState = None
 
         self.background_image = pygame.image.load("./assets/bg/bg8.png").convert()
-        # bg_layout =	import_csv_layout(level_data['background'])
-        # self.bg = self.create_tile_group(bg_layout,'background')
 
         floor_layout = import_csv_layout(level_data['boundary'])
         self.boundary = self.create_tile_group(floor_layout,'boundary')
         
-        # level_layout =	import_csv_layout(level_data['level'])
-        # self.level = self.create_tile_group(level_layout,'level')
   
         platform_layout = import_csv_layout(level_data['platform'])
         self.platform = self.create_tile_group(platform_layout,'platform')
@@ -46,7 +42,6 @@ class Level:
         self.rewards = self.create_tile_group(rewards_layout,'rewards')
 
         movable_blocks = import_csv_layout(level_data['Movable block'])
-        # print(movable_blocks)
         self.movable_blocks = self.create_tile_group(movable_blocks,'Movable Block') 
         
         wheel_layout = import_csv_layout(level_data['Wheel'])
@@ -64,8 +59,6 @@ class Level:
     
     
     def create_tile_group(self,layout,type):
-        # if type == 'background'  :
-        # 	bg_tile_list = import_cut_graphic('./assets/Tiled/TileMap9.png')
         if type == 'boundary' or type == 'slant_tiles1' or type == 'level' or type == 'Movable Block' :
             floor_tile_list = import_cut_graphic('./assets/Tiled/TileMap2.png')
         elif type == 'platform':
@@ -124,11 +117,9 @@ class Level:
                         sprite_group.add(sprite)
 
                     elif type == 'Movable Block':
-                        # tile_surface =floor_tile_list[int(val)].convert_alpha()
                         sprite = MovableBlocks(TILESIZE,x,y)
                         sprite_group.add(sprite)
                     elif type == 'wheel':
-                        # print(type)
                         sprite = Wheel(TILESIZE,x,y,'./assets/Spikes/Rotating/',speed = 0.1,)
                         sprite_group.add(sprite)
         return sprite_group
@@ -154,7 +145,6 @@ class Level:
         for sprite in self.spikes.sprites():
             if sprite.rect.colliderect(player.rect):
                 player.can_change = False
-                # self.display_lives()
                 if player.rect.right > sprite.rect.left and player.direction.x > 0:
                     player.rect.right = sprite.rect.left
 
@@ -169,7 +159,6 @@ class Level:
         for sprite in self.wheel.sprites():
             if sprite.rect.colliderect(player.rect):
                 player.can_change = False
-                # self.display_lives()
                 if player.rect.right > sprite.rect.left and player.direction.x > 0:
                     player.rect.right = sprite.rect.left
 
@@ -181,7 +170,6 @@ class Level:
                     for sprite in self.player:
                         sprite.dissappear()
                         self.remove_lives()
-                # pygame.quit()
     
         for sprite in self.home.sprites():
             if sprite.rect.colliderect(player.rect):
@@ -193,7 +181,6 @@ class Level:
                 elif player.rect.left < sprite.rect.right and player.direction.x < 0:
                     player.rect.left = sprite.rect.right
                 self.playState = "complete"
-                # pygame.quit()
         
         for sprite in self.rewards.sprites():
             if sprite.rect.colliderect(player.rect):
@@ -211,7 +198,6 @@ class Level:
         for sprite in self.movable_blocks.sprites():
             if sprite.rect.colliderect(player.rect):
                 if player.gender == 'Boy' and ((self.type == 'Level 1' and sprite.rect.left>=170) or(self.type == 'Level 2')):
-                    # print(sprite.rect.x)
                     player.can_change = False
                     if player.rect.right > sprite.rect.left and player.direction.x > 0:
                         sprite.rect.left = player.rect.right
@@ -242,7 +228,6 @@ class Level:
         player = self.player.sprite
         player.rect.y += player.direction.y
         player.apply_gravity()
-        # Check collision with outline tiles
         for sprite in self.boundary.sprites() :
             if sprite.rect.colliderect(player.rect):
                 player.can_change = False
@@ -262,7 +247,6 @@ class Level:
         for sprite in self.platform.sprites() :
             
             if sprite.rect.colliderect(player.rect):
-                # Check collision from above
                 if player.rect.bottom > sprite.rect.top and player.direction.y >= 0:
                     player.rect.bottom = sprite.rect.top
                     player.direction.y = 0
@@ -294,37 +278,10 @@ class Level:
                     for sprite in self.player:
                         sprite.dissappear()
                         self.remove_lives()
-                # self.display_lives()
-    
-        # for sprite in self.home.sprites():
-            
-        #     if sprite.rect.colliderect(player.rect):
-        #         player.can_change = False
-                
-        #         if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
-        #             player.rect.bottom = sprite.rect.top
-        #             player.direction.y = 0
-                                
-                    
-
-        #         elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
-        #             player.rect.top = sprite.rect.bottom
-        #             player.direction.y = -0.5*player.direction.y
                 
         for sprite in self.rewards.sprites():
             
             if sprite.rect.colliderect(player.rect):
-            #     player.can_change = False
-                
-            #     if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
-            #         player.rect.bottom = sprite.rect.top
-            #         player.direction.y = 0
-                                
-                    
-
-            #     elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
-            #         player.rect.top = sprite.rect.bottom
-            #         player.direction.y = -0.5*player.direction.y
                 self.rewards.remove(sprite)
                 self.coins += 1
         for sprite in self.movable_blocks.sprites():
@@ -349,13 +306,12 @@ class Level:
         elif self.type =='Level 1':
             sprite = Enemy((self.player.sprite.rect.x-110,291)) 
         elif self.type =='Level 3':
-            sprite = Enemy((self.player.sprite.rect.x-130,110))
-            print(1)
+            sprite = Enemy((self.player.sprite.rect.x-130,180))
+            # print(1)
         self.enemy_spawn = True
         self.enemy.add(sprite)
     
     def remove_lives(self):
-        # if(self.lives>=0):
         sprite_list = self.heart.sprites()
         if sprite_list:
             last_sprite = sprite_list[-1]
@@ -385,8 +341,6 @@ class Level:
             # print(1)
             return
         enemy = self.enemy.sprite
-        # if enemy.rect.x >=760:
-        # 	return
         if enemy.rect.x + enemy.direction.x >=900:
             self.enemy.empty()
             self.enemy_spawn = False
@@ -398,7 +352,6 @@ class Level:
                 enemy.can_change = False
                 if enemy.rect.right > sprite.rect.left and enemy.direction.x > 0:
                     enemy.rect.right = sprite.rect.left
-                    # enemy.speed = 0
 
                 
                 elif enemy.rect.left < sprite.rect.right and enemy.direction.x < 0:
@@ -406,7 +359,7 @@ class Level:
         
         for sprite in self.spikes.sprites():
             if sprite.rect.colliderect(enemy.rect):
-                print(2)
+                # print(2)
                 enemy.rect.bottom = sprite.rect.top
                 enemy.direction.y = 0
                 enemy.can_change = True
@@ -418,12 +371,10 @@ class Level:
     def enemy_vertical_collision(self):
         
         if self.enemy.sprite ==None:
-            # print(1)
             return
         enemy = self.enemy.sprite
         enemy.rect.y += enemy.direction.y
         enemy.apply_gravity()
-        # Check collision with outline tiles
         for sprite in self.boundary.sprites() :
             if sprite.rect.colliderect(enemy.rect):
                 enemy.can_change = False
@@ -454,7 +405,6 @@ class Level:
             if sprite.rect.colliderect(enemy.rect):
                 enemy.rect.bottom = sprite.rect.top
                 enemy.direction.y = 0
-                print(3)
                 enemy.can_change = True
                 self.enemy.empty()
                 self.enemy_spawn = False
@@ -462,23 +412,19 @@ class Level:
     
     def run(self):
         self.display_surface.fill((255,255,255,255))
-        # self.bg.draw(self.display_surface)
         
         self.draw_background(self.display_surface)
         self.boundary.draw(self.display_surface)
         
         self.update_life()
         self.heart.draw(self.display_surface)
-        # self.level.draw(self.display_surface)
         self.platform.draw(self.display_surface)
         self.home.draw(self.display_surface)
         self.platform_anim.draw(self.display_surface)
         self.spikes.draw(self.display_surface)
         self.rewards.draw(self.display_surface)
-        # self.movingTiles.draw(self.display_surface)
         self.movable_blocks.draw(self.display_surface)
         self.wheel.draw(self.display_surface)
-        # self.movingTiles.update()
         for sprite in self.wheel:
             sprite.update()
         for sprite in self.home:

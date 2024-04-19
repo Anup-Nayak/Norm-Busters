@@ -3,18 +3,30 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Initial.tmx",
+    "activeFile": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_2/Level_2.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_2/Level_2.tmx": {
+            "scale": 0.1232088122605364,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 3510.3008629402157,
+                "y": 2617.5075798802764
+            }
+        },
+        "Home1.tsx": {
+            "scaleInDock": 0.2,
+            "scaleInEditor": 1
+        },
         "Initial.tmx": {
             "scale": 0.16,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 3434.375,
-                "y": 2546.875
+                "x": 6396.875,
+                "y": 3946.875
             }
         },
         "Initial.tmx#1f": {
@@ -38,20 +50,30 @@
         "Initial.tmx#spikef": {
             "scaleInDock": 1
         },
+        "Platform.tsx": {
+            "scaleInDock": 0.2
+        },
+        "Spikes.tsx": {
+            "scaleInDock": 0.2
+        },
+        "Tiles.tsx": {
+            "scaleInDock": 0.2
+        },
         "home.tsx": {
             "scaleInDock": 0.33,
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_0",
+    "last.exportedFilePath": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_2",
     "last.imagePath": "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/home",
     "map.lastUsedExportFilter": "All Files (*)",
     "openFiles": [
-        "Initial.tmx",
-        "home.tsx"
+        "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_2/Level_2.tmx"
     ],
     "project": "level2.tiled-project",
     "recentFiles": [
+        "/home/anup/Desktop/cop290/game/mygame/cop290_a2/assets/levels/level_2/Level_2.tmx",
+        "Home1.tsx",
         "home.tsx",
         "Initial.tmx"
     ],

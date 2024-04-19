@@ -90,6 +90,8 @@ class Enemy(pygame.sprite.Sprite):
 			self.frame_index = 0
 		# print(animations)
 		self.image = animations[int(self.frame_index)]
+		self.rect.height = 70
+		self.rect.width = 50
 	
 	def update(self):
 		# print(self.rect)

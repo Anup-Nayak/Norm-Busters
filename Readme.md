@@ -26,14 +26,6 @@ or if you use python3
 python3 main.py
 ```
 
-## ToDo
-
-- [ ] Fix the walking animation glitch.
-- [ ] Fix double jump.
-- [ ] Add slant collisions.
-- [ ] Add the girl character.
-- [ ] Make Levels(3-4 Levels)
-- [ ] Add UI
 
 ## Resources Used:
 
