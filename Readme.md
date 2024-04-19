@@ -1,6 +1,9 @@
-# Fireboy and Watergirl Type Game
+# NormBusters Game
 
 Course Project for COP290 Design Practices, IIT Delhi 2024.
+Abolishing gender stereotypes is paramount for fostering a society where everyone can thrive regardless of their gender. In the context of our game, it serves as a crucial tool for identifying and destigmatizing these stereotypes, paving the way for equal contributions from all individuals.
+
+This is our attempt to contribute towards the societal effort to abolish gender stereotypes. By challenging and identifying preconceived notions about what roles and challenges are appropriate for each gender, we promote inclusivity and empower players to recognize and appreciate the diverse experiences faced by people of all genders. This not only creates a more equitable environment within the game but also translates into real-world attitudes and behaviors, ultimately contributing to a more just and harmonious society where everyone has the opportunity to fulfill their potential without limitations imposed by outdated societal norms.
 
 Group Members:
 
@@ -9,7 +12,7 @@ Group Members:
 
 ## ppt
 
-``` https://docs.google.com/presentation/d/10dP3XdaJ0udEoMPLQcGvJdAd80lQIAxQhJRdbLAnxxI/edit?usp=sharing ```
+`https://docs.google.com/presentation/d/10dP3XdaJ0udEoMPLQcGvJdAd80lQIAxQhJRdbLAnxxI/edit?usp=sharing`
 
 ## Installation
 
@@ -25,7 +28,6 @@ or if you use python3
 ```bash
 python3 main.py
 ```
-
 
 ## Resources Used:
 
