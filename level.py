@@ -469,7 +469,7 @@ class Level:
         self.platform_anim.draw(self.display_surface)
         self.spikes.draw(self.display_surface)
         self.rewards.draw(self.display_surface)
-        self.movingTiles.draw(self.display_surface)
+        # self.movingTiles.draw(self.display_surface)
         self.movable_blocks.draw(self.display_surface)
         self.wheel.draw(self.display_surface)
         # self.movingTiles.update()
