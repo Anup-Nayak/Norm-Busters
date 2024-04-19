@@ -363,7 +363,7 @@ class Level:
     def display_lives(self):
         if(self.lives>=0):
             for i in range(self.lives):
-                self.heart.add(AnimatedTile(TILESIZE,900-25*i,35,'./assets/Lifes/Health',speed=0))
+                self.heart.add(AnimatedTile(TILESIZE,505-25*i,25,'./assets/Lifes/Health',speed=0))
         
         
     def update_life(self):
@@ -379,12 +379,13 @@ class Level:
 
         
     def enemy_horizontal_collision(self):
-        if self.enemy == None:
+        if self.enemy.sprite ==None:
+            # print(1)
             return
         enemy = self.enemy.sprite
         # if enemy.rect.x >=760:
         # 	return
-        if enemy.rect.x + enemy.direction.x >=760:
+        if enemy.rect.x + enemy.direction.x >=900:
             self.enemy.empty()
             self.enemy_spawn = False
         else:
@@ -412,7 +413,8 @@ class Level:
         
         
     def enemy_vertical_collision(self):
-        if self.enemy == None:
+        if self.enemy.sprite ==None:
+            # print(1)
             return
         enemy = self.enemy.sprite
         enemy.rect.y += enemy.direction.y
@@ -487,7 +489,7 @@ class Level:
         if self.player:
             # print(self.player.sprite.rect)
             self.player.draw(self.display_surface)
-        if self.enemy_spawn == False and self.player.sprite.gender =='Girl' and ((self.player.sprite.rect.x >= 200 and self.type == 'Level 0') or (self.player.sprite.rect.x >=371 and self.player.sprite.rect.y == 241  and self.type == 'Level 1')):
+        if self.enemy_spawn == False and self.player.sprite.gender =='Girl' and ((self.player.sprite.rect.x >=371 and self.player.sprite.rect.y == 241  and self.type == 'Level 1')):
             self.enemy_setup()
         
         if self.player.sprite.gender !='Girl':
