@@ -130,7 +130,7 @@ class Level:
                         sprite_group.add(sprite)
                     elif type == 'wheel':
                         # print(type)
-                        sprite = AnimatedTile(TILESIZE,x,y,'./assets/Spikes/Rotating/',speed = 0.1,)
+                        sprite = Wheel(TILESIZE,x,y,'./assets/Spikes/Rotating/',speed = 0.1,)
                         sprite_group.add(sprite)
         return sprite_group
 
