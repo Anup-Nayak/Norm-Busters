@@ -12,13 +12,13 @@ def resize_image(image_path, width, height):
         resized_img = img.resize((width, height))
         
         # Save the resized image
-        resized_img.save(os.path.join(os.getcwd() +'/assets/MainMenu/bg.jpg').replace("\\", "/"))
+        resized_img.save(os.path.join(os.getcwd() +'/assets/MainMenu/over.jpg').replace("\\", "/"))
         print("Image resized successfully.")
     except Exception as e:
         print("Error:", e)
 
 # Path to the image file you want to resize
-image_path = os.path.join(os.getcwd() +'/assets/MainMenu/bg.jpg').replace("\\", "/")
+image_path = os.path.join(os.getcwd() +'/assets/MainMenu/over.jpg').replace("\\", "/")
 
 # Dimensions for resizing
 new_width = 39*25

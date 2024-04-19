@@ -14,10 +14,10 @@ class LevelMap:
         alpha_value = 120
         self.background.set_alpha(alpha_value)
         font = pygame.font.Font("assets/MainMenu/font.ttf", 40)
-        self.level0_button = Button("assets/level_map/levelNum.png", (201, 601), "", font, (0, 0, 0), (100, 100, 100),True)
-        self.level1_button = Button("assets/level_map/levelNum.png", (411, 544), "", font, (0, 0, 0), (100, 100, 100),True)
-        self.level2_button = Button("assets/level_map/levelNum.png", (632, 477), "", font, (0, 0, 0), (100, 100, 100),True)
-        self.level3_button = Button("assets/level_map/levelNum.png", (827, 420 ), "", font, (0, 0, 0), (100, 100, 100),True)
+        self.level0_button = Button("assets/level_map/levelNum.png", (201, 601), "", font,(255, 255, 255), (100, 100, 100),True)
+        self.level1_button = Button("assets/level_map/levelNum.png", (411, 544), "", font, (255, 255, 255), (100, 100, 100),True)
+        self.level2_button = Button("assets/level_map/levelNum.png", (632, 477), "", font, (255, 255, 255), (100, 100, 100),True)
+        self.level3_button = Button("assets/level_map/levelNum.png", (827, 420 ), "", font, (255, 255, 255), (100, 100, 100),True)
         self.clicked_button = None 
         
     def run(self):
@@ -56,13 +56,13 @@ class LevelMap:
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.background = pygame.image.load("./assets/MainMenu/bg.jpg").convert_alpha()
+        self.background = pygame.image.load("./assets/MainMenu/bg8.jpg").convert_alpha()
         alpha_value = 120
         self.background.set_alpha(alpha_value)
         font = pygame.font.Font("assets/MainMenu/font.ttf", 40)
-        self.play_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 200), "Play", font, (0, 0, 0), (100, 100, 100))
-        self.level_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Level", font, (0, 0, 0), (100, 100, 100))
-        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 200), "Quit", font, (0, 0, 0), (100, 100, 100))
+        self.play_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 100), "Play", font, (255, 255, 255), (100, 100, 100),True)
+        self.level_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Level", font, (255, 255, 255), (100, 100, 100),True)
+        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 100), "Quit", font, (255, 255, 255), (100, 100, 100),True)
 
     def run(self):
         while True:
@@ -94,14 +94,14 @@ class MainMenu:
 class PauseMenu:
     def __init__(self, screen):
         self.screen = screen
-        self.background = pygame.image.load("./assets/MainMenu/background.png").convert_alpha()
+        self.background = pygame.image.load("./assets/MainMenu/bg8.jpg").convert_alpha()
         alpha_value = 120
         self.background.set_alpha(alpha_value)
         font = pygame.font.Font("assets/MainMenu/font.ttf", 40)
-        self.resume_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 100), "Resume", font, (0, 0, 0), (100, 100, 100))
-        self.restart_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Restart", font, (0, 0, 0), (100, 100, 100))
-        self.home_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 100), "Home", font, (0, 0, 0), (100, 100, 100))
-        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 200), "Quit", font, (0, 0, 0), (100, 100, 100))
+        self.resume_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 100), "Resume", font, (255, 255, 255), (100, 100, 100),True)
+        self.restart_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Restart", font, (255, 255, 255), (100, 100, 100),True)
+        self.home_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 100), "Home", font, (255, 255, 255), (100, 100, 100),True)
+        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 200), "Quit", font, (255, 255, 255), (100, 100, 100),True)
         self.clicked_button = None 
         
     def run(self):
@@ -129,17 +129,100 @@ class PauseMenu:
                     self.home_button.changeColor(event.pos)
                     self.quit_button.changeColor(event.pos)
 
-            self.screen.blit(self.background, (0, 0))  # Blit background image
+            self.screen.blit(self.background, (0, 0))  
             self.resume_button.update(self.screen)
             self.restart_button.update(self.screen)
             self.home_button.update(self.screen)
             self.quit_button.update(self.screen)
             pygame.display.flip()
             
-            if self.clicked_button:  # Check if asel button has been clicked
-                return self.clicked_button  # Return the clicked button
+            if self.clicked_button:  
+                return self.clicked_button 
 
 
+class Completed:
+    def __init__(self, screen):
+        self.screen = screen
+        self.background = pygame.image.load("./assets/MainMenu/complete.jpg").convert_alpha()
+        
+        font = pygame.font.Font("assets/MainMenu/font.ttf", 40)
+        # self.resume_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 100), "Resume", font, (0, 0, 0), (100, 100, 100))
+        self.restart_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Levels", font, (255, 255, 255), (100, 100, 100),True)
+        self.home_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 100), "Home", font, (255, 255, 255), (100, 100, 100),True)
+        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 200), "Quit", font, (255, 255, 255), (100, 100, 100),True)
+        self.clicked_button = None 
+        
+    def run(self):
+        self.clicked_button = None 
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.restart_button.checkForInput(event.pos):
+                        self.clicked_button = "levelMap" 
+                    elif self.home_button.checkForInput(event.pos):
+                        self.clicked_button = "menu" 
+                    elif self.quit_button.checkForInput(event.pos):
+                        pygame.quit()
+                        sys.exit()
+                elif event.type == pygame.MOUSEMOTION:
+                    
+                    self.restart_button.changeColor(event.pos)
+                    self.home_button.changeColor(event.pos)
+                    self.quit_button.changeColor(event.pos)
+
+            self.screen.blit(self.background, (0, 0))  
+            self.restart_button.update(self.screen)
+            self.home_button.update(self.screen)
+            self.quit_button.update(self.screen)
+            pygame.display.flip()
+            
+            if self.clicked_button:  
+                return self.clicked_button  
+
+class Over:
+    def __init__(self, screen):
+        self.screen = screen
+        self.background = pygame.image.load("./assets/MainMenu/over.jpg").convert_alpha()
+        
+        font = pygame.font.Font("assets/MainMenu/font.ttf", 40)
+        # self.resume_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 - 100), "Resume", font, (0, 0, 0), (100, 100, 100))
+        self.restart_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2), "Levels", font, (255, 255, 255), (100, 100, 100),True)
+        self.home_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 100), "Home", font, (255, 255, 255), (100, 100, 100),True)
+        self.quit_button = Button("assets/MainMenu/banner.png", (WIDTH/2, HEIGHT/2 + 200), "Quit", font, (255, 255, 255), (100, 100, 100),True)
+        self.clicked_button = None 
+        
+    def run(self):
+        self.clicked_button = None 
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.restart_button.checkForInput(event.pos):
+                        self.clicked_button = "levelMap" 
+                    elif self.home_button.checkForInput(event.pos):
+                        self.clicked_button = "menu" 
+                    elif self.quit_button.checkForInput(event.pos):
+                        pygame.quit()
+                        sys.exit()
+                elif event.type == pygame.MOUSEMOTION:
+                    
+                    self.restart_button.changeColor(event.pos)
+                    self.home_button.changeColor(event.pos)
+                    self.quit_button.changeColor(event.pos)
+
+            self.screen.blit(self.background, (0, 0))  
+            self.restart_button.update(self.screen)
+            self.home_button.update(self.screen)
+            self.quit_button.update(self.screen)
+            pygame.display.flip()
+            
+            if self.clicked_button:  
+                return self.clicked_button  
 
 
 class Game:
@@ -150,6 +233,8 @@ class Game:
         self.state = "menu"  # Initial state is menu
         self.main_menu = MainMenu(self.screen)
         self.pause_menu = PauseMenu(self.screen)  # Added pause menu
+        self.completed_menu = Completed(self.screen)
+        self.over_menu = Over(self.screen)
         self.level = Level(level_0, self.screen)
         self.levelMap = LevelMap(self.screen)  # This will be set based on the selected level
 
@@ -166,6 +251,10 @@ class Game:
                     self.state = "play"  
                 elif pause_action == "home":
                     self.state = "menu"
+            elif self.state == "complete":
+                self.state = self.completed_menu.run()
+            elif self.state == "over":
+                self.state = self.over_menu.run()
             elif self.state == "levelMap":
                 level_number = self.levelMap.run()
                 # print(level_number)
@@ -188,11 +277,11 @@ class Game:
                 playState = self.level.updateState()
                 if playState == "complete":
                     self.level = Level(level_0, self.screen)  
-                    self.state = "menu"
+                    self.state = "complete"
                     self.level.playState = None
                 elif playState == "over":
                     self.level = Level(level_0, self.screen)  
-                    self.state = "menu"
+                    self.state = "over"
                     self.level.playState = None
                 pygame.display.flip()
                 self.clock.tick(FPS)
