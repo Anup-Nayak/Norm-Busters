@@ -47,7 +47,7 @@ level_2 = {
 	'rewards': './assets/levels/level_2/Level_2_rewards.csv',
 	'movingTiles': './assets/levels/level_2/Level_2_movingTiles.csv',
 	'Movable block':'./assets/levels/level_2/Level_2_Movable Block.csv',
-	'Wheel':'./assets/levels/level_2/Level_2_Wheel.csv',
+	'Wheel':'./assets/levels/level_2/Level_2_wheel.csv',
 	
 }
 

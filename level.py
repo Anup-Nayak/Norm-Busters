@@ -80,7 +80,6 @@ class Level:
             movingTiles_list = import_cut_graphic('./assets/Tiled/TileMap8.png')
         
         sprite_group = pygame.sprite.Group()
-        # print(layout)
         for row_index,row in enumerate(layout):
             for col_index,val in enumerate(row):
                 if val !='-1':
@@ -211,7 +210,7 @@ class Level:
 
         for sprite in self.movable_blocks.sprites():
             if sprite.rect.colliderect(player.rect):
-                if player.gender == 'Boy' and (self.type == 'Level 1' and sprite.rect.left>=170):
+                if player.gender == 'Boy' and ((self.type == 'Level 1' and sprite.rect.left>=170) or(self.type == 'Level 2')):
                     # print(sprite.rect.x)
                     player.can_change = False
                     if player.rect.right > sprite.rect.left and player.direction.x > 0:
