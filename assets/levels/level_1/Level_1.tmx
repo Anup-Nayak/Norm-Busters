@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="39" height="29" tilewidth="180" tileheight="180" infinite="0" nextlayerid="10" nextobjectid="1">
  <tileset firstgid="1" name="Untitled design (4)" tilewidth="180" tileheight="180" tilecount="36" columns="6">
-  <image source="../../../../TileMap/Untitled design (4).png" width="1080" height="1080"/>
+  <image source="../../Tiled/Untitled design (4).png" width="1080" height="1080"/>
  </tileset>
  <tileset firstgid="37" source="../../Tiles/Home1.tsx"/>
  <tileset firstgid="73" source="../../Tiles/Spikes.tsx"/>
