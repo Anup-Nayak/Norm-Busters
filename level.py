@@ -206,7 +206,7 @@ class Level:
                     player.rect.left = sprite.rect.right
 
                 self.rewards.remove(sprite)
-                self.coins += 1
+                self.coins+=1    
 
         for sprite in self.movable_blocks.sprites():
             if sprite.rect.colliderect(player.rect):
@@ -296,20 +296,20 @@ class Level:
                         self.remove_lives()
                 # self.display_lives()
     
-        for sprite in self.home.sprites():
+        # for sprite in self.home.sprites():
             
-            if sprite.rect.colliderect(player.rect):
-                player.can_change = False
+        #     if sprite.rect.colliderect(player.rect):
+        #         player.can_change = False
                 
-                if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
-                    player.rect.bottom = sprite.rect.top
-                    player.direction.y = 0
+        #         if player.rect.bottom > sprite.rect.top and player.direction.y > 0:
+        #             player.rect.bottom = sprite.rect.top
+        #             player.direction.y = 0
                                 
                     
 
-                elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
-                    player.rect.top = sprite.rect.bottom
-                    player.direction.y = -0.5*player.direction.y
+        #         elif player.rect.top < sprite.rect.bottom and player.direction.y < 0:
+        #             player.rect.top = sprite.rect.bottom
+        #             player.direction.y = -0.5*player.direction.y
                 
         for sprite in self.rewards.sprites():
             
@@ -348,7 +348,9 @@ class Level:
             sprite  = Enemy((self.player.sprite.rect.x-110,697))
         elif self.type =='Level 1':
             sprite = Enemy((self.player.sprite.rect.x-110,291)) 
-
+        elif self.type =='Level 3':
+            sprite = Enemy((self.player.sprite.rect.x-130,110))
+            print(1)
         self.enemy_spawn = True
         self.enemy.add(sprite)
     
@@ -404,6 +406,7 @@ class Level:
         
         for sprite in self.spikes.sprites():
             if sprite.rect.colliderect(enemy.rect):
+                print(2)
                 enemy.rect.bottom = sprite.rect.top
                 enemy.direction.y = 0
                 enemy.can_change = True
@@ -413,6 +416,7 @@ class Level:
         
         
     def enemy_vertical_collision(self):
+        
         if self.enemy.sprite ==None:
             # print(1)
             return
@@ -450,6 +454,7 @@ class Level:
             if sprite.rect.colliderect(enemy.rect):
                 enemy.rect.bottom = sprite.rect.top
                 enemy.direction.y = 0
+                print(3)
                 enemy.can_change = True
                 self.enemy.empty()
                 self.enemy_spawn = False
@@ -485,11 +490,9 @@ class Level:
 
         self.horizontal_collision()
         self.vertical_collision()
-        # self.detect_top_left_slant_collision()
         if self.player:
-            # print(self.player.sprite.rect)
             self.player.draw(self.display_surface)
-        if self.enemy_spawn == False and self.player.sprite.gender =='Girl' and ((self.player.sprite.rect.x >=371 and self.player.sprite.rect.y == 241  and self.type == 'Level 1')):
+        if self.enemy_spawn == False and self.player.sprite.gender =='Girl' and ((self.player.sprite.rect.x >=371 and self.player.sprite.rect.y == 241  and self.type == 'Level 1')or ( self.type == 'Level 3' and self.player.sprite.rect.y == 66 and self.player.sprite.rect.x >= 300)  ):
             self.enemy_setup()
         
         if self.player.sprite.gender !='Girl':
@@ -497,7 +500,6 @@ class Level:
             self.enemy_spawn = False
 
         if self.enemy:
-            # print(self.enemy.sprite.rect)
             self.enemy.update()
             self.enemy_horizontal_collision()
             self.enemy_vertical_collision()
@@ -507,14 +509,9 @@ class Level:
             sprite.update()
         self.respawn()
         
-        # for sprite in self.player:
-        # 	sprite.draw_mask(self.display_surface)
         if self.player: 
             self.player.update()
             
-        # pygame.display.flip()
-
-        # debug(self.coins)
     
     def updateState(self):
         if self.playState:

@@ -62,6 +62,5 @@ level_3 = {
 	'rewards': './assets/levels/level_3/Level_3_rewards.csv',
 	'movingTiles': './assets/levels/level_3/Level_3_movingTiles.csv',
 	'Movable block':'./assets/levels/level_3/Level_3_Movable Block.csv',
-	'Wheel':'./assets/levels/level_3/Level_3_Wheel.csv',
-	
+	'Wheel':'./assets/levels/level_3/Level_3_wheel.csv',	
 }

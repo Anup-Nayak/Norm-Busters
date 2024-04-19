@@ -10,8 +10,8 @@ class Button():
 		self.text_input = text_input
 		self.text = self.font.render(self.text_input, True, self.base_color)
 		if self.image is None:
-			self.image = pygame.Surface((200, 50))  # Create a blank surface if no image provided
-			self.image.fill((255, 255, 255))  # Fill with white color			
+			self.image = pygame.Surface((200, 50))  
+			self.image.fill((255, 255, 255))  	
 		if transparent:
 			self.image.set_alpha(0)
 		self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))

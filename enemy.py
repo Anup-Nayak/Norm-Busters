@@ -18,7 +18,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.jump_speed = 0
 		self.idle_state = '_right'
 		self.on_ground = True
-		self.speed = 6
+		self.speed = 7
 		self.timer = pygame.time.get_ticks() 
 		self.can_change = False
 		self.status = 'idle_right' 
@@ -95,5 +95,6 @@ class Enemy(pygame.sprite.Sprite):
 		# print(self.rect)
 		self.get_input()
 		self.get_status()
+		debug(self.rect)
 		self.animate()	
                 
