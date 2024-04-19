@@ -18,7 +18,7 @@ def resize_image(image_path, width, height):
         print("Error:", e)
 
 # Path to the image file you want to resize
-image_path = os.path.join(os.getcwd() +'/assets/MainMenu/background.jpg').replace("\\", "/")
+image_path = os.path.join(os.getcwd() +'/assets/MainMenu/bg.jpg').replace("\\", "/")
 
 # Dimensions for resizing
 new_width = 39*25
