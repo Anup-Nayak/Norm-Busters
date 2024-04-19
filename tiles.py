@@ -110,6 +110,9 @@ class AnimatedTile(Tile):
 		if(self.index >=len(self.animations)):
 			self.index =0
 		self.image = self.animations[int(self.index)]
+		self.rect.height = self.image.get_height()
+		self.rect.width = self.image.get_width()
+		# self.image.fill((0,0,0))
 	def update(self):
 		# self.image = self.animations[0].convert_alpha()
 		self.animate()
@@ -131,4 +134,20 @@ class MovingTile(Tile):
         elif self.direction == 'vertical':
             self.rect.y += self.speed
         # self.image = self.surface
+class MovableBlocks(Tile):
+	def __init__(self,size,x,y):
+		super().__init__(size,x,y)
+		self.image = (import_folder('./assets/Block/'))[0]
+		self.rect.height = 50
+		self.rect.width = 50
+	def move(self,dx,dy):
+		self.rect.x += dx
+		self.rect.y += dy
+
+
+# class Wheel(Tile):
+# 	def __init__(self,size,x,y):
+# 		super().__init__(size,x,y)
 		
+
+# class Lava(Tile):

@@ -1,0 +1,88 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 4156,
+                "y": 3092
+            }
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#1f": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#Bf": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#Run2F": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#TileMap3": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#TileMap5": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#Untitled design (19)": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#Untitled design (4)": {
+            "scaleInDock": 1
+        },
+        "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/Tiles/Level0.tmx#spikef": {
+            "scaleInDock": 1
+        },
+        "Initial.tmx": {
+            "scale": 0.18648148148148147,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3515.094339622642,
+                "y": 2614.2005958291957
+            }
+        },
+        "Initial.tmx#TileMap3": {
+            "scaleInDock": 1
+        },
+        "Initial.tmx#TileMap5": {
+            "scaleInDock": 1
+        },
+        "untitled.tmx": {
+            "scale": 0.18648148148148147,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 3515.094339622642,
+                "y": 2614.2005958291957
+            }
+        },
+        "untitled.tmx#Untitled design (17)": {
+            "scaleInDock": 1
+        },
+        "untitled.tmx#Untitled design (19)": {
+            "scaleInDock": 1
+        },
+        "untitled.tmx#Untitled design (25)": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "D:/Abhishek_Folder/Coding/Game Dev/COP1/assets/levels/level_0",
+    "map.height": 29,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.tileHeight": 180,
+    "map.tileWidth": 180,
+    "map.width": 39,
+    "openFiles": [
+    ],
+    "project": "Level1.tiled-project",
+    "recentFiles": [
+        "Initial.tmx",
+        "untitled.tmx"
+    ]
+}
