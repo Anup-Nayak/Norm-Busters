@@ -16,8 +16,13 @@ Group Members:
 
 ## Installation
 
-- clone the repo using git clone
-- run the game using
+- Clone the Repository using
+  ``` git clone ```
+
+- *Install dependencies*
+  ``` pip install -r requirements.txt ```
+  
+- Run the game using
 
 ```bash
 python main.py
