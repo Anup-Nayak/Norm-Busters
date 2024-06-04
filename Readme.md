@@ -17,10 +17,14 @@ Group Members:
 ## Installation
 
 - Clone the Repository using
-  ``` git clone ```
+  ```
+   git clone
+   ```
 
 - *Install dependencies*
-  ``` pip install -r requirements.txt ```
+  ```
+  pip install -r requirements.txt
+  ```
   
 - Run the game using
 
