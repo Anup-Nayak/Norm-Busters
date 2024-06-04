@@ -18,7 +18,7 @@ Group Members:
 
 - Clone the Repository using
   ```
-   git clone
+   git clone https://github.com/Anup-Nayak/Norm-Busters.git
    ```
 
 - *Install dependencies*
